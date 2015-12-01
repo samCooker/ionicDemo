@@ -4,19 +4,19 @@
 
 (function(){
     appModule
-        .controller('loginCtrl',loginCtrlFun)// 登陆控制器
+        .controller('startCtrl',startCtrlFun)// 登陆控制器
         .controller('appCtrl',AppCtrlFun) // 首页共用的控制器
         .controller('newFordosCtrl',NewFordosCtrlFun); // 新待办列表控制器
 
     // 登陆控制器
-    function loginCtrlFun($scope,$state,tipMsg){
+    function startCtrlFun($scope,$state,tipMsg){
         $scope.loginData={};
         $scope.login=loginFun;
 
         function loginFun(){
             console.log($scope.loginData);
             if($scope.loginData.username == 'samCooker'&&$scope.loginData.password == 1){
-                $state.go('app/newfordos');
+                $state.go('/app/newfordos');
 
             }else{
                 tipMsg.showMsg('username or password error!');

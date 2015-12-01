@@ -17,6 +17,7 @@
             console.log($scope.loginData);
             if($scope.loginData.username == 'samCooker'&&$scope.loginData.password == 1){
                 $state.go('app/newfordos');
+
             }else{
                 tipMsg.showMsg('username or password error!');
             }

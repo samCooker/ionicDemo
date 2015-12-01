@@ -1,0 +1,30 @@
+<ion-view >
+    <div class="bar bar-header bar-positive item-input-inset" >
+        <label class="item-input-wrapper">
+            <input class="input" type="text" ng-model="searchTitle" placeholder="input title to search ..." />
+        </label>
+        <div class="button button-clear">
+
+        </div>
+    </div>
+    <ion-content on-scroll-complete="getScrollPosition()" class="stable-bg has-header">
+        <ion-refresher on-refresh="doRefresh()"
+                       pulling-text="下拉刷新..."
+                       refreshing-text="正在刷新!"
+                       spinner="android">
+        </ion-refresher>
+        <ion-list>
+            <ion-item ng-repeat="item in itemList" >
+                {{item.title}}
+                <ion-option-button class="button-info" ng-click="finishItem(item)">
+                    <i class="icon ion-checkmark-round calm"></i>
+                </ion-option-button>
+                <ion-option-button class="button-info" ng-click="deleteItem(item)">
+                    <i class="icon ion-close-round assertive"></i>
+                </ion-option-button>
+            </ion-item>
+        </ion-list>
+        <!-- <ion-infinite-scroll on-infinite="loadMore()" spinner="android" distance="1%" immediate-check="false"></ion-infinite-scroll> -->
+    </ion-content>
+    <div  class="scrollToTop" ng-click="scrollTop()" ng-if="topFlag">[TOP]</div>
+</ion-view>

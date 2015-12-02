@@ -1,0 +1,37 @@
+<!--模板需放在 ion-modal-view 标签内-->
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">Sign up</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeSignUp()">Close</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <form ng-submit="signUp(signUpForm.$valid)" role="form" name="signUpForm">
+        <div class="list">
+            <label class="item item-input">
+                <i class="icon ion-android-person padding-right ss-log-i-30 calm"></i>
+                <input type="text" ng-model="signData.username" placeholder="username" required name="username">
+                <!--<i class="icon ion-close-round assertive" style="padding-right: 2%;" ng-if="signUpForm.username.$dirty && signUpForm.username.$valid"></i>-->
+                <i class="icon ion-checkmark balanced" style="padding-right: 2%;" ng-if="signUpForm.username.$dirty && signUpForm.username.$valid"></i>
+            </label>
+            <label class="item item-input">
+                <i class="icon ion-email padding-right ss-log-i-30 calm"></i>
+                <input type="text" ng-model="signData.email" placeholder="email" type="email" name="email">
+                <i class="icon ion-checkmark balanced" style="padding-right: 2%;" ng-if="signUpForm.email.$dirty && signUpForm.email.$valid"></i>
+            </label>
+            <label class="item item-input">
+                <i class="icon ion-ios-locked padding-right ss-log-i-30 calm"></i>
+                <input type="password" ng-model="signData.password" placeholder="password">
+            </label>
+            <label class="item item-input">
+                <i class="icon ion-ios-locked padding-right ss-log-i-30 calm"></i>
+                <input type="password" ng-model="signData.checkpwd" placeholder="check password">
+            </label>
+            <label class="item">
+                <button class="button button-block button-positive" type="submit">Sign Up</button>
+            </label>
+        </div>
+        </form>
+    </ion-content>
+</ion-modal-view>

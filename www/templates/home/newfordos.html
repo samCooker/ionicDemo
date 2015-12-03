@@ -4,7 +4,7 @@
             <input class="input" type="text" ng-model="searchTitle" placeholder="input title to search ..." />
         </label>
         <div class="button button-clear">
-
+            <button class="button button-icon button-clear ion-search" ng-click="search()"></button>
         </div>
     </div>
     <ion-content on-scroll-complete="getScrollPosition()" class="stable-bg has-header">
@@ -24,6 +24,7 @@
                 </ion-option-button>
             </ion-item>
         </ion-list>
+        <!--可设置ng-if防止无限加载-->
         <!-- <ion-infinite-scroll on-infinite="loadMore()" spinner="android" distance="1%" immediate-check="false"></ion-infinite-scroll> -->
     </ion-content>
     <div  class="scrollToTop" ng-click="scrollTop()" ng-if="topFlag">[TOP]</div>

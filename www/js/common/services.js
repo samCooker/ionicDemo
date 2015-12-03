@@ -3,12 +3,16 @@
  */
 
 (function(){
-    appModule.factory('tipMsg', TipMsgFun)//信息提示
+    appModule
+        .factory('tipMsg', TipMsgFun)//信息提示
     ;
 
+    //各种消息提示框
     function TipMsgFun($ionicPopup){
         Fac={
-            showMsg:showMsgFun//toast
+            showMsg:showMsgFun,//过一段时间会自动消失的提示框
+            alertMsg:alertMsgFun, //带确定按钮的提示框
+            inputMsg:inputMsgFun //自定义的可输入信息的对话框
         };
 
         //msg:显示的信息，duration：持续时间('short','long')默认short，position:显示位置('top', 'center', 'bottom'),默认center
@@ -20,19 +24,30 @@
                 window.plugins.toast.show(msg,_duration,_position);
             }else{
                 //无toast插件显示提示框
-                var alertPopup = $ionicPopup.alert({
-                    title: 'tip message', // String. 弹窗的标题。
-                    subTitle: '', // String (可选)。弹窗的子标题。
-                    template: msg, // String (可选)。放在弹窗body内的html模板。
-                    okText: 'GET IT'// String (默认: 'OK')。OK按钮的文字。
-                    //templateUrl: '', // String (可选)。 放在弹窗body内的html模板的URL。
-                    //okType: '' // String (默认: 'button-positive')。OK按钮的类型。
-                });
-                alertPopup.then(function(res) {
-                    //res--true
-            });
+                alertMsgFun(msg);
             }
+        }
+
+        //带确定按钮的提示框 title:提示框标题 btnText:按钮的文字
+        function alertMsgFun(msg,title,btnText){
+            var alertPopup = $ionicPopup.alert({
+                title: title||'tip message', // String. 弹窗的标题。
+                subTitle: '', // String (可选)。弹窗的子标题。
+                template: msg, // String (可选)。放在弹窗body内的html模板。
+                okText: btnText||'GET IT'// String (默认: 'OK')。OK按钮的文字。
+                //templateUrl: '', // String (可选)。 放在弹窗body内的html模板的URL。
+                //okType: '' // String (默认: 'button-positive')。OK按钮的类型。
+            });
+            alertPopup.then(function(res) {
+                //点击确定后
+            });
+        }
+
+        function inputMsgFun($scope,title,subTitle){
+
         }
         return Fac;
     }
+
+
 })();

@@ -14,7 +14,8 @@
         $scope.toSignUp=toSignUpFun;//弹出注册框
         $scope.closeSignUp=closeSignUpFun;//关闭注册框
         $scope.signUp=signUpFun;//注册
-
+        $scope.loginData.username="samCooker";
+        $scope.loginData.password="1";
 
         // 创建一个弹出窗模板
         $ionicModal.fromTemplateUrl('templates/models/sign-up.html', {
@@ -26,7 +27,7 @@
 
         //登陆
         function loginFun(){
-            if($scope.loginData.username == 'samCooker'&&$scope.loginData.password == 1){
+            if($scope.loginData.username&&$scope.loginData.password == 1){
                 $state.go('app.newfordos');//调整至新待办页面
             }else{
                 tipMsg.showMsg('username or password error!');

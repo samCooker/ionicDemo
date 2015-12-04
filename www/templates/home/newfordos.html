@@ -1,6 +1,7 @@
 <ion-view >
     <div class="bar bar-header bar-positive item-input-inset" >
         <label class="item-input-wrapper">
+            <i class="icon ion-search placeholder-icon"></i>
             <input class="input" type="text" ng-model="searchTitle" placeholder="input title to search ..." />
         </label>
         <div class="button button-clear">
@@ -25,7 +26,6 @@
             </ion-item>
         </ion-list>
         <!--可设置ng-if防止无限加载-->
-        <!-- <ion-infinite-scroll on-infinite="loadMore()" spinner="android" distance="1%" immediate-check="false"></ion-infinite-scroll> -->
+         <ion-infinite-scroll on-infinite="loadMore()" spinner="android" distance="1%" immediate-check="false" ng-if="!isLoadEnd"></ion-infinite-scroll>
     </ion-content>
-    <div  class="scrollToTop" ng-click="scrollTop()" ng-if="topFlag">[TOP]</div>
 </ion-view>

@@ -6,3 +6,12 @@
 .ss-log-i-30{
     font-size: 30px;
 }
+/*列表浮动图标*/
+.scrollToTop{
+    height: 48px;
+    width: 48px;
+    position: fixed;
+    bottom: 10%;
+    right: 5%;
+    z-index: 1000;
+}

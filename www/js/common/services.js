@@ -44,7 +44,25 @@
         }
 
         function inputMsgFun($scope,title,subTitle){
-
+            $scope._popData = {};//需要预先定义一个弹出窗数据接收对象
+            var selfPopup= $ionicPopup.show({
+                template: '<input type="text" ng-model="_popData.text">',
+                title: title||'Enter Something',
+                subTitle:subTitle||'',
+                scope: $scope,//弹出窗的scope继承自父页面
+                buttons: [
+                    { text: 'Cancel' },
+                    {
+                        text: '<b>Save</b>',
+                        type: 'button-positive',
+                        onTap: function(e) {
+                            //不允许用户关闭 e.preventDefault();
+                            return $scope._popData.text;
+                        }
+                    }
+                ]
+            });
+            return selfPopup;
         }
         return Fac;
     }

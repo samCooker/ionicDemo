@@ -1,5 +1,39 @@
 <ion-view >
+    <!--顶部工具栏-->
+    <!--align-title:标题对齐方式 title:标题-->
+    <ion-header-bar align-title="center" class="bar-positive">
+        <!--<div class="buttons">-->
+            <!--<button class="button" ng-click="doSomething()">左侧按钮</button>-->
+        <!--</div>-->
+        <h1 class="title">Title!</h1>
+        <div class="buttons">
+            <button class="button" ng-click="share()">share</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <div class="list">
+            <div class="item">share content : {{bottomMsg}}</div>
+
+            <div class="item item-divider">Check test : 1:{{isChecked1}} 2:{{isChecked2}}</div>
+            <ion-checkbox ng-model="isChecked1" ng-value="check" ng-true-value="'check'" ng-false-value="'uncheck'">checkbox</ion-checkbox>
+            <!--自定义的checkbox-->
+            <ion-check-sty ng-model="isChecked2" ng-value="check" ng-true-value="'check'" ng-false-value="'uncheck'">checkbox</ion-check-sty>
+
+            <div class="item item-divider" style="background-color: #FFF;"></div>
+
+            <div class="item item-divider">Radio test:{{data.checkData}}</div>
+            <!--ng-value="'A'" ！！字符串类型！！-->
+            <ion-radio ng-model="data.checkData" ng-value="'A'" >Choose A</ion-radio>
+            <ion-radio ng-model="data.checkData" ng-value="'B'" >Choose B</ion-radio>
+            <ion-radio ng-model="data.checkData" ng-value="'C'" >Choose C</ion-radio>
+            <!--自定义的radio-->
+            <ion-radio-sty ng-model="data.checkData" ng-value="'D'">Choose D</ion-radio-sty>
 
 
-
+        </div>
+    </ion-content>
+    <!--底部工具栏-->
+    <!--<ion-footer-bar align-title="center" class="bar-assertive">-->
+        <!--<h1 class="title" ></h1>-->
+    <!--</ion-footer-bar>-->
 </ion-view>

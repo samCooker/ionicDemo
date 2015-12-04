@@ -18,3 +18,7 @@ appModule.run(function($ionicPlatform) {
     });
 
 });
+//tabs位置设置
+appModule.config(function($ionicConfigProvider){
+    $ionicConfigProvider.tabs.position("bottom"); //参数可以是： top | bottom
+});

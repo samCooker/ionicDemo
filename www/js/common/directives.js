@@ -5,7 +5,62 @@
     appModule
         .directive('ionRadioSty', IonRadioStyDir) //扩展自ion-radio的指令，修改了其模版
         .directive('ionCheckSty',IonCheckStyDir) //扩展自ion-check的指令，修改了其模版
+        .directive('sdDatePicker',DatePickerInputDir)//自定义的日期选择指令
         ;
+
+    //自定义的日期选择指令
+    function DatePickerInputDir(){
+        return {
+            restrict:'E',
+            replace:true,
+            require:'?ngModel',
+            transclude: true,
+            template:
+                '<label class="item-input-wrapper">'+
+                '<input class="input" type="text" readonly/>'+
+                '<i class="icon ion-calendar placeholder-icon"></i>'+
+                '</label>',
+            compile:function(element,attr){
+                //自定义日期图标
+                if(attr.icon){
+                    var iconElm = element.find('i');
+                    iconElm.removeClass('ion-calendar').addClass(attr.icon);
+                }
+
+                var label = element.find('label');
+                if(angular.isDefined(attr.ngClick)){
+                    label.attr('ng-click',attr.ngClick);
+                }
+                if(attr.class){
+                    label.addClass(attr.class);
+                }
+
+                var input = element.find('input');
+                angular.forEach({
+                    'name': attr.name,
+                    'value': attr.value,
+                    'disabled': attr.disabled,
+                    'ng-value': attr.ngValue,
+                    'ng-model': attr.ngModel,
+                    'ng-disabled': attr.ngDisabled,
+                    'ng-change': attr.ngChange,
+                    'ng-required': attr.ngRequired,
+                    'required': attr.required,
+                    'placeholder':attr.placeholder
+                }, function(value, name) {
+                    if (angular.isDefined(value)) {
+                        input.attr(name, value);
+                    }
+                });
+
+                return function(scope, element, attr) {
+                    scope.getValue = function() {
+                        return scope.ngValue || attr.value;
+                    };
+                };
+            }
+        }
+    }
 
     //扩展自ion-radio的指令，修改了其模版
     function IonRadioStyDir(){
@@ -23,9 +78,10 @@
                 '<div class="item-content disable-pointer-events" ng-transclude></div>' +
                 '</label>',
             compile: function(element, attr) {
+                //可自定义选中时的图标
                 if (attr.icon) {
                     var iconElm = element.find('i');
-                    iconElm.removeClass('ion-checkmark').addClass(attr.icon);
+                    iconElm.removeClass('checkbox-icon').addClass(attr.icon);
                 }
 
                 var input = element.find('input');
@@ -87,8 +143,6 @@
                         input.attr(name, value);
                     }
                 });
-                var checkboxWrapper = element[0].querySelector('.checkbox');
-                checkboxWrapper.classList.add('checkbox-' + $ionicConfig.form.checkbox());
             }
         };
     }

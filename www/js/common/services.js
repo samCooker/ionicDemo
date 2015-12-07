@@ -5,6 +5,7 @@
 (function(){
     appModule
         .factory('tipMsg', TipMsgFun)//信息提示
+        .factory('tools',ToolsFun)//各工具方法
     ;
 
     //各种消息提示框
@@ -64,6 +65,51 @@
             });
             return selfPopup;
         }
+        return Fac;
+    }
+
+    //各工具方法
+    function ToolsFun(tipMsg){
+        var Fac={
+            dataPicker:dataPickerFun //日期控件
+        }
+
+        /**
+         * 日期控件(success:选择成功后的回调函数,[options:选择参数])
+         * date : ,//初始日期
+         * mode : 'date',
+         * minDate: ,//能选择的最小日期
+         * maxDate: ,//能选择的最大日期
+         * cancelText: ,
+         * okText: ,
+         * todayText: '',
+         * nowText: '',
+         * is24Hour: false,
+         * //android日期选择主题样式:THEME_TRADITIONAL | THEME_HOLO_DARK | THEME_HOLO_LIGHT | THEME_DEVICE_DEFAULT_DARK | THEME_DEVICE_DEFAULT_LIGHT
+         * androidTheme: window.plugins.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+         * */
+        function dataPickerFun(success,options){
+            if(window.plugins&&window.plugins.datePicker){
+                var opts=options||{};
+                opts.date = opts.date || new Date();//指定开始选中的时间
+                window.plugins.datePicker.show(
+                    opts,
+                    function(returnDate){
+                    if(typeof(success)==="function"){
+                        success(returnDate);
+                    }else{
+                        console.log(success+" 不是一个方法。");
+                    }
+                    },
+                    function(error) {
+                        //取消事件
+                    }
+                );
+            }else{
+                tipMsg.showMsg("no datePicker.");
+            }
+        }
+
         return Fac;
     }
 

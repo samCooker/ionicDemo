@@ -1,5 +1,15 @@
 <ion-view >
+    <div class="bar bar-header bar-positive item-input-inset" >
+
+    </div>
+    <ion-content class="stable-bg has-header">
+        <ion-refresher on-refresh="doRefresh()"
+                       pulling-text="下拉刷新..."
+                       refreshing-text="正在刷新!"
+                       spinner="android">
+        </ion-refresher>
 
 
+    </ion-content>
 
 </ion-view>

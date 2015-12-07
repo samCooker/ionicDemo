@@ -8,7 +8,7 @@
             <button class="button button-icon button-clear ion-search" ng-click="search()"></button>
         </div>
     </div>
-    <ion-content on-scroll-complete="getScrollPosition()" class="stable-bg has-header">
+    <ion-content on-scroll-complete="scrollComplete()"  delegate-handle="fordoScroll" class="stable-bg has-header">
         <ion-refresher on-refresh="doRefresh()"
                        pulling-text="下拉刷新..."
                        refreshing-text="正在刷新!"
@@ -17,6 +17,7 @@
         <ion-list>
             <ion-item ng-repeat="item in itemList" >
                 {{item.title}}
+                <!--列表按钮-->
                 <ion-option-button class="button-info" ng-click="finishItem(item)">
                     <i class="icon ion-checkmark-round calm"></i>
                 </ion-option-button>
@@ -28,4 +29,5 @@
         <!--可设置ng-if防止无限加载-->
          <ion-infinite-scroll on-infinite="loadMore()" spinner="android" distance="1%" immediate-check="false" ng-if="!isLoadEnd"></ion-infinite-scroll>
     </ion-content>
+    <div class="ss-scroll-box" ng-if="showToTop" ng-click="scrollToTop()"><i class="icon ion-arrow-up-a"></i><div>[TOP]</div></div>
 </ion-view>

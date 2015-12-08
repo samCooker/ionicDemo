@@ -95,8 +95,8 @@
     }
 
     // 各待办控制器
-    function FordosCtrlFun(){
-
+    function FordosCtrlFun($scope){
+        $scope.imgItems=[{img:'1.gif'},{img:'2.jpg'},{img:'3.jpg'},{img:'4.jpg'},{img:'5.png'},{img:'6.jpg'}];
     }
 
     // 其他插件演示控制器

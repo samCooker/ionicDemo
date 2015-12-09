@@ -4,7 +4,7 @@
 var appModule = angular.module('starter', ['ionic']);
 
 // 设置运行时的参数
-appModule.run(function($ionicPlatform) {
+appModule.run(function($ionicPlatform,$location,$rootScope,$ionicHistory,tipMsg) {
 
     $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -16,6 +16,37 @@ appModule.run(function($ionicPlatform) {
       StatusBar.styleDefault();
     }
     });
+
+    //物理返回按钮控制&双击退出应用
+    $ionicPlatform.registerBackButtonAction(function (e) {
+        if ($location.path() == '/app/newfordos' || $location.path() == '/login') {
+            //判断处于哪个页面时双击退出
+            if ($rootScope.backButtonPressedOnceToExit) {
+                ionic.Platform.exitApp();//退出app
+            } else {
+                $rootScope.backButtonPressedOnceToExit = true;
+                tipMsg.showMsg('再按一次退出系统');
+                setTimeout(function () {
+                    $rootScope.backButtonPressedOnceToExit = false;
+                }, 2000);
+            }
+        }else if ($ionicHistory.backView()) {
+            //点击返回上一个页面，先隐藏显示的键盘
+            if (window.cordova.plugins.Keyboard.isVisible) {
+                window.cordova.plugins.Keyboard.close();
+            } else {
+                $ionicHistory.goBack();
+            }
+        }else {
+            $rootScope.backButtonPressedOnceToExit = true;
+            tipMsg.showMsg('再按一次退出系统');
+            setTimeout(function () {
+                $rootScope.backButtonPressedOnceToExit = false;
+            }, 2000);
+        }
+        e.preventDefault();
+        return false;
+    }, 101);//101 数值越高优先级越高，详情可查看源码
 
 });
 //tabs位置设置

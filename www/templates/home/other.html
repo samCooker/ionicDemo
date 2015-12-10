@@ -1,11 +1,13 @@
 <ion-view >
-    <!--顶部工具栏-->
-    <!--align-title:标题对齐方式 title:标题-->
+    <!--顶部工具栏ion-header-bar:点击可返回顶部-->
+    <!--align-title:标题对齐方式 -->
     <ion-header-bar align-title="center" class="bar-positive">
         <!--<div class="buttons">-->
             <!--<button class="button" ng-click="doSomething()">左侧按钮</button>-->
         <!--</div>-->
-        <h1 class="title">Title!</h1>
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+        <h1 class="title">Title!</h1><!--title:标题-->
         <div class="buttons">
             <button class="button" ng-click="share()">share</button>
         </div>

@@ -14,3 +14,7 @@ demo可查看首页的注册对话框
 cordova CLI: cordova plugin add cordova-plugin-datepicker
 详情可查看https://www.npmjs.com/package/cordova-plugin-datepicker
 *******************end************************
+
+****************Toast插件************************
+
+*******************end**************************

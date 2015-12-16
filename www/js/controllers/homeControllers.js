@@ -100,7 +100,7 @@
     }
 
     // 其他插件演示控制器
-    function OtherCtrlFun($scope,$ionicActionSheet,tipMsg,$ionicPopup,tools){
+    function OtherCtrlFun($scope,$ionicActionSheet,tipMsg,$ionicPopup,$filter,tools){
         $scope.share=shareFun;// 显示操作表
         $scope.inputMsg=inputMsgFun;// 显示可输入信息的弹出框
         $scope.pickDate1=pickDateFun1;//日期选择
@@ -146,7 +146,7 @@
         //日期选择
         function pickDateFun1(){
             tools.dataPicker(function(date){
-                $scope.pickDateVal1=date;
+                $scope.pickDateVal1=$filter('date')(date,'yyyy-MM-dd');
             },{
                 date:$scope.pickDateVal1,
                 androidTheme:1

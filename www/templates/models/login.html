@@ -1,8 +1,9 @@
+<!--模板需放在 ion-modal-view 标签内-->
 <ion-modal-view>
 <ion-header-bar>
-    <h1 class="title">Login</h1>
+    <h1 class="title">登录</h1>
     <div class="buttons">
-        <button class="button button-clear" ng-click="loginModal.hide()">Close</button>
+        <button class="button button-clear button-icon ion-close-round" ng-click="loginModal.hide()"></button>
     </div>
 </ion-header-bar>
 <ion-content>
@@ -16,7 +17,7 @@
             <input type="password" ng-model="loginData.password" placeholder="password">
         </label>
         <label class="item">
-            <button class="button button-block button-positive" ng-click="login()">Log in</button>
+            <button class="button button-block button-positive" ng-click="login()">登录</button>
         </label>
     </div>
 </ion-content>

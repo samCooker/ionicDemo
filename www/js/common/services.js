@@ -6,17 +6,24 @@
     appModule
         .factory('tipMsg', TipMsgFun)//信息提示
         .factory('tools',ToolsFun)//各工具方法
+        .factory('dbTool',DbToolFun)//本地存储
     ;
 
     //各种消息提示框
     function TipMsgFun($ionicPopup){
         Fac={
-            showMsg:showMsgFun,//过一段时间会自动消失的提示框
+            showMsg:showMsgFun,//Toast提示框
             alertMsg:alertMsgFun, //带确定按钮的提示框
-            inputMsg:inputMsgFun //自定义的可输入信息的对话框
+            inputMsg:inputMsgFun,//自定义的可输入信息的对话框
+            confirm:confirmFun//确定对话框
         };
 
-        //msg:显示的信息，duration：持续时间('short','long')默认short，position:显示位置('top', 'center', 'bottom'),默认center
+        /**
+         * Toast提示框
+         * @param msg 显示的信息
+         * @param duration 持续时间('short','long')默认short
+         * @param position 显示位置('top', 'center', 'bottom'),默认center
+         */
         function showMsgFun(msg,duration,position){
             var _duration=duration||'short';
             var _position=position||'center';
@@ -29,13 +36,18 @@
             }
         }
 
-        //带确定按钮的提示框 title:提示框标题 btnText:按钮的文字
+        /**
+         * 带确定按钮的提示框 title:提示框标题 btnText:按钮的文字
+         * @param msg
+         * @param title
+         * @param btnText
+         */
         function alertMsgFun(msg,title,btnText){
             var alertPopup = $ionicPopup.alert({
-                title: title||'tip message', // String. 弹窗的标题。
+                title: title||'提示信息', // String. 弹窗的标题。
                 subTitle: '', // String (可选)。弹窗的子标题。
                 template: msg, // String (可选)。放在弹窗body内的html模板。
-                okText: btnText||'GET IT'// String (默认: 'OK')。OK按钮的文字。
+                okText: btnText||'确定'// String (默认: 'OK')。OK按钮的文字。
                 //templateUrl: '', // String (可选)。 放在弹窗body内的html模板的URL。
                 //okType: '' // String (默认: 'button-positive')。OK按钮的类型。
             });
@@ -44,17 +56,24 @@
             });
         }
 
+        /**
+         * 可输入信息的对话框
+         * @param $scope
+         * @param title
+         * @param subTitle
+         * @returns {*}
+         */
         function inputMsgFun($scope,title,subTitle){
             $scope._popData = {};//需要预先定义一个弹出窗数据接收对象
-            var selfPopup= $ionicPopup.show({
+            return $ionicPopup.show({
                 template: '<input type="text" ng-model="_popData.text">',
-                title: title||'Enter Something',
+                title: title||'请输入内容',
                 subTitle:subTitle||'',
-                scope: $scope,//弹出窗的scope继承自父页面
+                scope: $scope,//弹出窗的scope继承自父页面，可以访问父页面数据
                 buttons: [
-                    { text: 'Cancel' },
+                    { text: '取消' },
                     {
-                        text: '<b>Save</b>',
+                        text: '<b>保存</b>',
                         type: 'button-positive',
                         onTap: function(e) {
                             //不允许用户关闭 e.preventDefault();
@@ -63,7 +82,21 @@
                     }
                 ]
             });
-            return selfPopup;
+        }
+
+        /**
+         * 带有确定、取消的对话框
+         * @param msg
+         * @param title
+         * @returns {*} 对话框对象
+         */
+        function confirmFun(msg,title){
+           return $ionicPopup.confirm({
+               okText:'确定',
+               cancelText:'取消',
+               title: title||'确认操作',
+               template: msg
+            });
         }
         return Fac;
     }
@@ -108,6 +141,70 @@
             }else{
                 tipMsg.showMsg("no datePicker.");
             }
+        }
+
+        return Fac;
+    }
+
+    // 本地存储
+    function DbToolFun(tipMsg){
+        var Fac={
+            initWebSqlDb:initWebSqlDbFun,
+            putFdData:putFdDataFun,
+            findFdData:findFdDataFun,
+            getAllDocs:getAllDocsFun,
+            getDb:getDbFun
+        };
+
+        var _db;
+        var _fdId='fodoItem';
+        var _fdIndex=0;
+
+        /**
+         * 创建一个本地存储数据库
+         * @param dbname 数据库名称
+         */
+        function initWebSqlDbFun(dbname){
+            _db=new PouchDB(dbname, {adapter : 'websql'});
+        }
+
+        /**
+         * 保存待办数据
+         * @param data 数据对象
+         * @param callBack 成功时的回调函数,可为空
+         */
+        function putFdDataFun(data,callBack){
+            data._id=_fdId+data.title;
+            _db.put(data).then(function (result) {
+                tipMsg.showMsg('保存成功。');
+                if(typeof(callBack)==='function'){
+                    callBack(result);
+                }
+            }).catch(function (err) {
+                tipMsg.showMsg('保存失败。');
+                console.log(err);
+            });
+        }
+
+        function findFdDataFun(title){
+            return _db.find({
+                selector: {title:{$eq:title}},
+                fields: ['_id','title','content']
+            });
+        }
+
+        function getAllDocsFun(){
+            _db.allDocs({include_docs: true}).then(function (result) {
+                console.log(result.rows);
+            })
+        }
+
+        /**
+         * 获取创建的数据库
+         * @returns _db 在应用启动时创建，见app.js
+         */
+        function getDbFun(){
+            return _db;
         }
 
         return Fac;

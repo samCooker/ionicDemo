@@ -4,18 +4,21 @@
 var appModule = angular.module('starter', ['ionic']);
 
 // 设置运行时的参数
-appModule.run(function($ionicPlatform,$location,$rootScope,$ionicHistory,tipMsg) {
+appModule.run(function($ionicPlatform,$location,$rootScope,$ionicHistory,tipMsg,dbTool) {
 
     $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
-    }
+        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        // for form inputs)
+        if(window.cordova && window.cordova.plugins.Keyboard) {
+          cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        }
+        if(window.StatusBar) {
+          StatusBar.styleDefault();
+        }
     });
+
+    //初始化本地存储数据库
+    dbTool.initWebSqlDb('appDb');
 
     //物理返回按钮控制&双击退出应用
     $ionicPlatform.registerBackButtonAction(function (e) {

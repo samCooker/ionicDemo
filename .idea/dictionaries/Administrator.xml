@@ -2,6 +2,7 @@
   <dictionary name="Administrator">
     <words>
       <w>checkmark</w>
+      <w>dbname</w>
       <w>websql</w>
     </words>
   </dictionary>

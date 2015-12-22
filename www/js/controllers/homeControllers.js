@@ -10,8 +10,12 @@
         ;
 
     // 首页共用的控制器
-    function HomeCtrlFun($scope,$ionicModal,$state){
-        $scope.logout=logoutFun;//登出
+    function HomeCtrlFun($scope,$ionicModal,$state,dbTool,tipMsg){
+//        $scope.logout=logoutFun;//登出
+        $scope.logout=findAllIndexesFun;
+        $scope.delAllIndexes=delAllIndexesFun;
+        $scope.findAllIndexes=findAllIndexesFun;
+        $scope.addIndex=addIndexFun;
         $scope.fordoNum=80;
 
         // 创建一个弹出窗模板
@@ -24,6 +28,61 @@
 
         function logoutFun(){
             $state.go("login");
+        }
+
+        //添加索引
+        function addIndexFun(){
+            tipMsg.inputMsg($scope,'请输入要建立索引的字段名').then(function(res){
+                if(res){
+                    dbTool.getDb().createIndex({
+                        index: {
+                            fields: [res],//对字段建立索引
+                            name:res+'-index'
+                        }
+                    }).then(function (result) {
+                        tipMsg.showMsg('创建成功。');
+                        console.log(result);
+                    }).catch(function (err) {
+                        tipMsg.showMsg('创建失败。');
+                        console.log(err);
+                    });
+                }
+            });
+
+        }
+
+        //查询出所有索引
+        function findAllIndexesFun(){
+            dbTool.getDb().getIndexes().then(function (result) {
+                console.log(result);
+            });
+        }
+
+        //删除索引确认操作
+        function delAllIndexesFun(){
+            tipMsg.confirm('确定删除所有索引？').then(function(res){
+                if(res){//确定操作
+                    findAllItemsFun();
+                }
+            });
+        }
+
+        //查询所有索引,然后删除
+        function findAllItemsFun(){
+            dbTool.getDb().getIndexes().then(function (result) {
+                if(result.indexes){
+                    result.indexes.forEach(function(eachItem){
+                        if(eachItem.ddoc) {
+                            dbTool.getDb().deleteIndex(eachItem).then(function (result) {
+                            });
+                        }
+                    });
+                    tipMsg.showMsg('删除成功。');
+                }
+            }).catch(function (err) {
+                console.log(err);
+                tipMsg.showMsg('索引出现异常');
+            });
         }
 
     }
@@ -94,9 +153,62 @@
 
     }
 
-    // 各待办控制器
-    function FordosCtrlFun($scope){
-        $scope.imgItems=[{img:'1.gif'},{img:'2.jpg'},{img:'3.jpg'},{img:'4.jpg'},{img:'5.png'},{img:'6.jpg'}];
+
+    function FordosCtrlFun($scope,$ionicModal,$timeout,dbTool,tipMsg){
+        $scope.doRefresh=doRefreshFun;
+        $scope.addNewItem=addNewItemFun;
+        $scope.openAddItemDlg=openAddItemDlgFun;
+        $scope.findItem=findItemByTitle;
+        $scope.imgItems=[];
+        $scope.itemData={};
+        $scope.search={};
+
+        // 创建一个弹出窗模板
+        $ionicModal.fromTemplateUrl('templates/models/new-item.html', {
+            scope: $scope,//继承自父scope
+            animation: 'slide-in-up'//弹出动画
+        }).then(function(modal) {
+            $scope.itemModal = modal;
+        });
+
+        //打开弹出窗
+        function openAddItemDlgFun(){
+            $scope.itemData={};//先清空之前的数据
+            $scope.itemModal.show();
+        }
+
+        /**
+         * 添加新的数据，保存在本地数据库中
+         */
+        function addNewItemFun(){
+            if($scope.itemData.title){
+                dbTool.putFdData($scope.itemData,function(res){
+                    console.log(res);
+                });
+            }else{
+                tipMsg.showMsg('标题不能为空。');
+            }
+        }
+
+        /**
+         * 下拉刷新
+         */
+        function doRefreshFun(){
+            $scope.imgItems=[];
+            $timeout(function(){
+
+                $scope.$broadcast('scroll.refreshComplete');//广播下拉完成事件，否则图标不消失
+            },1000);
+        }
+
+        function findItemByTitle(){
+            dbTool.findFdData($scope.search.title).then(function(data){
+                $scope.imgItems=data;
+            }).catch(function(err){
+                tipMsg.showMsg('没有找到无数据');
+            });
+        }
+
     }
 
     // 其他插件演示控制器

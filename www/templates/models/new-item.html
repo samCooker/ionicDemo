@@ -1,0 +1,24 @@
+<!--模板需放在 ion-modal-view 标签内-->
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">添加条目</h1>
+        <div class="buttons">
+            <button class="button button-clear button-icon ion-close-round" ng-click="itemModal.hide()"></button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <div class="list">
+            <label class="item item-input">
+                <i class="icon ion-android-clipboard padding-right ss-log-i-30 calm"></i>
+                <input type="text" ng-model="itemData.title" placeholder="请输入标题">
+            </label>
+            <label class="item item-input">
+                <i class="icon ion-android-document padding-right ss-log-i-30 calm"></i>
+                <textarea ng-model="itemData.content" placeholder="请输入内容" rows="3"></textarea>
+            </label>
+            <label class="item">
+                <button class="button button-block button-positive" ng-click="addNewItem()">添加</button>
+            </label>
+        </div>
+    </ion-content>
+</ion-modal-view>

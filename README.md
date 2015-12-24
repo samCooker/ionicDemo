@@ -10,18 +10,17 @@ demo可查看首页的注册对话框
 ***************end***************************
 
 
-****************时间插件***********************
+****************1.时间插件***********************
 cordova CLI: cordova plugin add cordova-plugin-datepicker
 详情可查看https://www.npmjs.com/package/cordova-plugin-datepicker
 *******************end************************
 
-
-****************Toast插件***********************
-
+****************2.Toast插件***********************
+cordova plugin add cordova-plugin-x-toast
+详情查看：https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin
 *******************end**************************
 
-
-*****************PouchDB 本地存储****************
+*****************3.PouchDB 本地存储插件****************
 PouchDB是操作SQLite数据库的javascript库（跟mongoose操作mongodb一样）
 
 SQLite是一种轻量级的嵌入式数据库（数据库不需要你安装的，手机系统自带，你需要安装的就是SQLite插件）

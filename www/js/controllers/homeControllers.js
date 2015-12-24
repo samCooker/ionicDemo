@@ -153,12 +153,20 @@
 
     }
 
-
-    function FordosCtrlFun($scope,$ionicModal,$timeout,dbTool,tipMsg){
+    /**
+     * 条目列表控制器
+     * @param $scope
+     * @param $ionicModal
+     * @param dbTool
+     * @param tipMsg
+     * @constructor
+     */
+    function FordosCtrlFun($scope,$ionicModal,dbTool,tipMsg){
         $scope.doRefresh=doRefreshFun;
         $scope.addNewItem=addNewItemFun;
         $scope.openAddItemDlg=openAddItemDlgFun;
         $scope.findItem=findItemByTitle;
+        $scope.deleteItem=deleteItemFun;
         $scope.imgItems=[];
         $scope.itemData={};
         $scope.search={};
@@ -194,24 +202,45 @@
          * 下拉刷新
          */
         function doRefreshFun(){
-            $scope.imgItems=[];
-            $timeout(function(){
-
+            dbTool.getAllFdData().then(function(data){
+                $scope.imgItems=data;
                 $scope.$broadcast('scroll.refreshComplete');//广播下拉完成事件，否则图标不消失
-            },1000);
+            });
         }
 
+        /**
+         * 通过标题查找条目
+         */
         function findItemByTitle(){
+            $scope.imgItems=[];
             dbTool.findFdData($scope.search.title).then(function(data){
                 $scope.imgItems=data;
+                $scope.$broadcast('scroll.refreshComplete');//刷新一下页面，否则页面不显示
             }).catch(function(err){
-                tipMsg.showMsg('没有找到无数据');
+                tipMsg.showMsg('没有找到数据');
             });
+        }
+
+        /**
+         * 删除条目
+         * @param item
+         */
+        function deleteItemFun(item){
+
         }
 
     }
 
-    // 其他插件演示控制器
+    /**
+     * 其他插件演示控制器
+     * @param $scope
+     * @param $ionicActionSheet
+     * @tipMsg
+     * @param $ionicPopup
+     * @param $filter
+     * @param tools
+     * @constructor
+     */
     function OtherCtrlFun($scope,$ionicActionSheet,tipMsg,$ionicPopup,$filter,tools){
         $scope.share=shareFun;// 显示操作表
         $scope.inputMsg=inputMsgFun;// 显示可输入信息的弹出框
@@ -259,6 +288,7 @@
         function pickDateFun1(){
             tools.dataPicker(function(date){
                 $scope.pickDateVal1=$filter('date')(date,'yyyy-MM-dd');
+                $scope.$broadcast('scroll.refreshComplete');//刷新一下页面，否则页面不显示
             },{
                 date:$scope.pickDateVal1,
                 androidTheme:1
@@ -267,7 +297,8 @@
         //日期选择
         function pickDateFun2(){
             tools.dataPicker(function(date){
-                $scope.pickDateVal2=date;
+                $scope.pickDateVal2=$filter('date')(date,'yyyy-MM-dd HH:mm:ss');
+                $scope.$broadcast('scroll.refreshComplete');//刷新一下页面，否则页面不显示
             },{
                 date:$scope.pickDateVal2,
                 androidTheme:2
@@ -276,7 +307,8 @@
         //日期选择
         function pickDateFun3(){
             tools.dataPicker(function(date){
-                $scope.pickDateVal3=date;
+                $scope.pickDateVal3=$filter('date')(date,'yyyy-MM-dd HH:mm:ss');
+                $scope.$broadcast('scroll.refreshComplete');//刷新一下页面，否则页面不显示
             },{
                 date:$scope.pickDateVal3,
                 androidTheme:3
@@ -285,7 +317,8 @@
         //日期选择
         function pickDateFun4(){
             tools.dataPicker(function(date){
-                $scope.pickDateVal4=date;
+                $scope.pickDateVal4=$filter('date')(date,'yyyy-MM-dd HH:mm:ss');
+                $scope.$broadcast('scroll.refreshComplete');//刷新一下页面，否则页面不显示
             },{
                 date:$scope.pickDateVal4,
                 androidTheme:4
@@ -294,9 +327,11 @@
         //日期选择
         function pickDateFun5(){
             tools.dataPicker(function(date){
-                $scope.pickDateVal5=date;
+                $scope.pickDateVal5=$filter('date')(date,'yyyy-MM-dd HH:mm:ss');
+                $scope.$broadcast('scroll.refreshComplete');//刷新一下页面，否则页面不显示
             },{
                 date:$scope.pickDateVal5,
+                mode:'time',
                 androidTheme:5
             });
         }

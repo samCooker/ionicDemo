@@ -9,7 +9,12 @@
         .factory('dbTool',DbToolFun)//本地存储
     ;
 
-    //各种消息提示框
+    /**
+     * 各种消息提示框
+     * @param $ionicPopup
+     * @returns {*}
+     * @constructor
+     */
     function TipMsgFun($ionicPopup){
         Fac={
             showMsg:showMsgFun,//Toast提示框
@@ -101,7 +106,12 @@
         return Fac;
     }
 
-    //各工具方法
+    /**
+     * 各工具方法
+     * @param tipMsg
+     * @returns {*}
+     * @constructor
+     */
     function ToolsFun(tipMsg){
         var Fac={
             dataPicker:dataPickerFun //日期控件
@@ -146,19 +156,24 @@
         return Fac;
     }
 
-    // 本地存储
+    /**
+     * 本地存储
+     * @param tipMsg
+     * @returns {*}
+     * @constructor
+     */
     function DbToolFun(tipMsg){
         var Fac={
             initWebSqlDb:initWebSqlDbFun,
             putFdData:putFdDataFun,
             findFdData:findFdDataFun,
+            getAllFdData:getAllFdDataFun,
             getAllDocs:getAllDocsFun,
             getDb:getDbFun
         };
 
         var _db;
         var _fdId='fodoItem';
-        var _fdIndex=0;
 
         /**
          * 创建一个本地存储数据库
@@ -190,13 +205,35 @@
             return _db.find({
                 selector: {title:{$eq:title}},
                 fields: ['_id','title','content']
+            }).then(function(data){
+                var itemList=[];
+                if(data.docs&&data.docs.length>0){
+                    data.docs.forEach(function(doc){
+                        if(doc.title){
+                            itemList.push(doc);
+                        }
+                    });
+                }
+                return itemList;
             });
         }
 
         function getAllDocsFun(){
-            _db.allDocs({include_docs: true}).then(function (result) {
-                console.log(result.rows);
-            })
+            return _db.allDocs({include_docs: true});
+        }
+
+        function getAllFdDataFun(){
+            var data=[];
+            return _db.allDocs({include_docs: true}).then(function (result) {
+                if(result.rows&&result.rows.length>0){
+                    result.rows.forEach(function(row){
+                        if(row.doc&&row.doc.title){
+                            data.push(row.doc);
+                        }
+                    });
+                }
+                return data;
+            });
         }
 
         /**

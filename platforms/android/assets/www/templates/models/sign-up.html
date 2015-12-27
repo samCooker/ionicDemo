@@ -1,0 +1,43 @@
+<!--模板需放在 ion-modal-view 标签内-->
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">注册</h1>
+        <div class="buttons">
+            <button class="button button-clear button-icon ion-close-round" ng-click="closeSignUp()">Close</button>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <!-- angularjs的表单验证 novalidate屏蔽浏览器的默认校验行为-->
+        <!--formName.inputFieldName.$pristine 布尔值属性，表示用户是否修改了表单。如果为ture，表示没有修改过；false表示修改过-->
+        <!--formName.inputFieldName.$dirty布尔型属性，当且仅当用户实际已经修改的表单。不管表单是否通过验证：-->
+        <!--formName.inputFieldName.$valid布尔型属性，它指示表单是否通过验证。如果表单当前通过验证，他将为true：-->
+        <!--formName.inputFieldName.$invalid未通过验证的表单 -->
+        <!--formName.inputFieldName.$error 保存着没有通过验证的验证器名称以及对应的错误信息。-->
+        <form ng-submit="signUp(signUpForm.$valid)" role="form" name="signUpForm" novalidate>
+        <div class="list">
+            <label class="item item-input">
+                <i class="icon ion-android-person padding-right ss-log-i-30 calm"></i>
+                <input type="text" ng-model="signData.username" placeholder="username" required name="username">
+                <i class="icon ion-close-round assertive" style="padding-right: 2%;" ng-if="signUpForm.username.$error.required"></i>
+                <!--<i class="icon ion-checkmark balanced" style="padding-right: 2%;" ng-if="signUpForm.username.$dirty && signUpForm.username.$valid"></i>-->
+            </label>
+            <label class="item item-input">
+                <i class="icon ion-email padding-right ss-log-i-30 calm"></i>
+                <input type="text" ng-model="signData.email" placeholder="email" type="email" name="email">
+                <i class="icon ion-checkmark balanced" style="padding-right: 2%;" ng-if="signUpForm.email.$dirty && signUpForm.email.$valid"></i>
+            </label>
+            <label class="item item-input">
+                <i class="icon ion-ios-locked padding-right ss-log-i-30 calm"></i>
+                <input type="password" ng-model="signData.password" placeholder="password">
+            </label>
+            <label class="item item-input">
+                <i class="icon ion-ios-locked padding-right ss-log-i-30 calm"></i>
+                <input type="password" ng-model="signData.checkpwd" placeholder="check password">
+            </label>
+            <label class="item">
+                <button class="button button-block button-positive" type="submit">注册</button>
+            </label>
+        </div>
+        </form>
+    </ion-content>
+</ion-modal-view>

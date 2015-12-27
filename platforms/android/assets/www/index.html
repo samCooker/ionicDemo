@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
+    <!--your css style-->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+    <script src="lib/ionic/js/ionic-angular.min.js"></script>
+
+    <!-- pouchdb js-->
+    <script src="lib/pouchdb/pouchdb-5.0.0.min.js"></script>
+    <script src="lib/pouchdb/pouchdb.find.min.js"></script>
+
+      <!-- cordova script (this will be a 404 during development) -->
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <script src="js/configRouter.js"></script>
+    <script src="js/common/directives.js"></script>
+    <script src="js/common/filters.js"></script>
+    <script src="js/common/services.js"></script>
+
+    <script src="js/controllers/loginControllers.js"></script>
+    <script src="js/controllers/homeControllers.js"></script>
+    <script src="js/controllers/picControllers.js"></script>
+
+  </head>
+  <body ng-app="starter" class="platform-android platform-cordova platform-webview">
+  <!--所有页面的人口-->
+  <ion-nav-view ></ion-nav-view>
+  </body>
+</html>

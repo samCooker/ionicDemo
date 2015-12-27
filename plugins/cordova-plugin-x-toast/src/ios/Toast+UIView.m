@@ -48,6 +48,12 @@ static const NSString * CSToastActivityViewKey  = @"CSToastActivityViewKey";
 
 static UIView *prevToast = NULL;
 
+// doesn't matter these are static
+static id commandDelegate;
+static id callbackId;
+static id msg;
+static id data;
+
 @interface UIView (ToastPrivate)
 
 - (void)hideToast:(UIView *)toast;
@@ -56,11 +62,11 @@ static UIView *prevToast = NULL;
 - (CGPoint)centerPointForPosition:(id)position withToast:(UIView *)toast withAddedPixelsY:(int) addPixelsY;
 - (UIView *)viewForMessage:(NSString *)message title:(NSString *)title image:(UIImage *)image;
 - (CGSize)sizeForString:(NSString *)string font:(UIFont *)font constrainedToSize:(CGSize)constrainedSize lineBreakMode:(NSLineBreakMode)lineBreakMode;
-
 @end
 
 
 @implementation UIView (Toast)
+
 
 #pragma mark - Toast Methods
 
@@ -73,7 +79,11 @@ static UIView *prevToast = NULL;
     [self showToast:toast duration:duration position:position];
 }
 
-- (void)makeToast:(NSString *)message duration:(NSTimeInterval)duration position:(id)position addPixelsY:(int)addPixelsY {
+- (void)makeToast:(NSString *)message duration:(NSTimeInterval)duration position:(id)position addPixelsY:(int)addPixelsY data:(NSDictionary*)_data commandDelegate:(id <CDVCommandDelegate>)_commandDelegate callbackId:(NSString *)_callbackId {
+  commandDelegate = _commandDelegate;
+  callbackId = _callbackId;
+  msg = message;
+  data = _data;
   UIView *toast = [self viewForMessage:message title:nil image:nil];
   [self showToast:toast duration:duration position:position addedPixelsY:addPixelsY];
 }
@@ -101,12 +111,13 @@ static UIView *prevToast = NULL;
   [self showToast:toast duration:CSToastDefaultDuration position:CSToastDefaultPosition addedPixelsY:0];
 }
 
-- (void)showToast:(UIView *)toast duration:(NSTimeInterval)duration position:(id)point addedPixelsY:(int) addPixelsY  {
+- (void)showToast:(UIView *)toast duration:(NSTimeInterval)duration position:(id)point addedPixelsY:(int) addPixelsY {
     [self hideToast];
     prevToast = toast;
     toast.center = [self centerPointForPosition:point withToast:toast withAddedPixelsY:addPixelsY];
     toast.alpha = 0.0;
 
+    // note that we changed this to be always true
     if (CSToastHidesOnTap) {
         UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:toast action:@selector(handleToastTapped:)];
         [toast addGestureRecognizer:recognizer];
@@ -168,6 +179,15 @@ static UIView *prevToast = NULL;
     [timer invalidate];
 
     [self hideToast:recognizer.view];
+  
+    // also send an event back to JS
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:msg, @"message", @"touch", @"event", nil];
+    if (data != nil) {
+      [dict setObject:data forKey:@"data"];
+    }
+  
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dict];
+    [commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
 
 #pragma mark - Toast Activity Methods

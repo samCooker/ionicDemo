@@ -35,3 +35,13 @@ demo: 查看homeControllers.js的FordosCtrlFun方法
 PouchDB查询插件:
 https://github.com/nolanlawson/pouchdb-find
 *********************end***********************
+
+********************图片浏览**********************
+cordova CLI: cordova plugin add https://github.com/wymsee/cordova-imagePicker.git
+
+**********************end************************
+
+*****************文件上传下载插件****************
+cordova CLI: cordova plugin add cordova-plugin-file-transfer
+
+**********************end**********************

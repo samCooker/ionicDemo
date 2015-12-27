@@ -1,0 +1,36 @@
+@charset "UTF-8";
+/*
+首页 登陆注册样式
+*/
+/*图标大小*/
+.ss-log-i-30{
+    font-size: 30px;
+}
+/*列表浮动图标*/
+.ss-scroll-box{
+    height: 48px;
+    width: 60px;
+    position: fixed;
+    bottom: 10%;
+    right: 5%;
+    z-index: 1000;
+    text-align: center;
+}
+
+.ss-scroll-box i{
+    font-size: 30px;
+    color: #11A8DE;
+}
+
+/*日期选择按钮样式*/
+.ss-date-pick{
+    background: #83F4F9;
+    width: 300px;
+}
+.ss-date-pick input {
+    width:90%;
+}
+.ss-date-pick i {
+    font-size: 30px;
+    color: #FFFFFF;
+}

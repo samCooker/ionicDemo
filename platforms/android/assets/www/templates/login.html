@@ -1,0 +1,51 @@
+<!--带有左侧菜单的登陆页-->
+<ion-side-menus enable-menu-with-back-views="false">
+    <ion-side-menu-content>
+        <ion-view>
+            <ion-header-bar>
+                <h1 class="title">Login</h1>
+            </ion-header-bar>
+            <ion-content>
+                <div class="list">
+                    <label class="item item-input">
+                        <i class="icon ion-android-person padding-right ss-log-i-30 calm"></i>
+                        <input type="text" ng-model="loginData.username" placeholder="username">
+                    </label>
+                    <label class="item item-input">
+                        <i class="icon ion-ios-locked padding-right ss-log-i-30 calm"></i>
+                        <input type="password" ng-model="loginData.password" placeholder="password">
+                    </label>
+                    <label class="item">
+                        <button class="button button-block button-positive" ng-click="login()">Log in</button>
+                    </label>
+                </div>
+            </ion-content>
+        </ion-view>
+    </ion-side-menu-content>
+
+    <ion-side-menu side="left" >
+        <ion-header-bar class="bar-stable">
+            <h1 class="title">Options</h1>
+        </ion-header-bar>
+        <ion-content class="stable-bg"><!--背景色-->
+            <ion-list>
+                <ion-item class="item-stable item-thumbnail-left">
+                    <img src="img/user.png"/><div>Welcome</div>
+                </ion-item>
+                <ion-item class="item-stable">
+                    <label class="item-input">
+                        <input type="text" placeholder="say something ..."/>
+                    </label>
+                </ion-item>
+                <!--item-icon-left 带有左图标 item-icon-right 带有右图标-->
+                <ion-item menu-close ng-click="" class="item-stable item-icon-left item-icon-right">
+                    <!--icon 图标样式 ion-log-in 图标名称 calm图标颜色-->
+                    <i class="icon ion-log-in calm"></i> Login <i class="icon list-insert ion-chevron-right"></i>
+                </ion-item>
+                <ion-item menu-close ng-click="toSignUp()" class="item-stable item-icon-left item-icon-right">
+                    <i class="icon ion-android-checkmark-circle dark"></i> Sign Up  <i class="icon list-insert ion-chevron-right"></i>
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

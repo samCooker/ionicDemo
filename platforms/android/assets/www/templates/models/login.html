@@ -1,0 +1,24 @@
+<!--模板需放在 ion-modal-view 标签内-->
+<ion-modal-view>
+<ion-header-bar>
+    <h1 class="title">登录</h1>
+    <div class="buttons">
+        <button class="button button-clear button-icon ion-close-round" ng-click="loginModal.hide()"></button>
+    </div>
+</ion-header-bar>
+<ion-content>
+    <div class="list">
+        <label class="item item-input">
+            <i class="icon ion-android-person padding-right ss-log-i-30 calm"></i>
+            <input type="text" ng-model="loginData.username" placeholder="username">
+        </label>
+        <label class="item item-input">
+            <i class="icon ion-ios-locked padding-right ss-log-i-30 calm"></i>
+            <input type="password" ng-model="loginData.password" placeholder="password">
+        </label>
+        <label class="item">
+            <button class="button button-block button-positive" ng-click="login()">登录</button>
+        </label>
+    </div>
+</ion-content>
+</ion-modal-view>

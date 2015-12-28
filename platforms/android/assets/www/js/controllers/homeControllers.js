@@ -174,9 +174,12 @@
         $scope.openAddItemDlg=openAddItemDlgFun;
         $scope.findItem=findItemByTitle;
         $scope.deleteItem=deleteItemFun;
+        $scope.editItem=editItemFun;
         $scope.imgItems=[];
         $scope.itemData={};
         $scope.search={};
+
+        var imgSrc={1:'1.gif',2:'2.jpg',3:'3.jpg',4:'4.jpg',5:'5.png',6:'6.jpg'};
 
         // 创建一个弹出窗模板
         $ionicModal.fromTemplateUrl('templates/models/new-item.html', {
@@ -197,8 +200,14 @@
          */
         function addNewItemFun(){
             if($scope.itemData.title){
-                dbTool.putFdData($scope.itemData,function(res){
-                    console.log(res);
+                if(!$scope.itemData.img){
+                    //随机获取一个已存在的图片名称
+                    $scope.itemData.img=imgSrc[Math.ceil(Math.random()*10)%6+1];
+                }
+                console.log($scope.itemData);
+                dbTool.postOrUpdate($scope.itemData).then(function(res){
+                    $scope.itemModal.hide();
+                    doRefreshFun();
                 });
             }else{
                 tipMsg.showMsg('标题不能为空。');
@@ -233,7 +242,20 @@
          * @param item
          */
         function deleteItemFun(item){
+            dbTool.rmFdData(item).then(function(res){
+                if(res.ok) {
+                    tipMsg.showMsg("删除成功");
+                    doRefreshFun();
+                }
+            });
+        }
 
+        /**
+         *
+         */
+        function editItemFun(item){
+            $scope.itemData=item;//先清空之前的数据
+            $scope.itemModal.show();
         }
 
     }

@@ -1,0 +1,40 @@
+<ion-view view-title="本地存储"><!--导航栏标题 view-title="条目列表"-->
+    <ion-nav-bar class="bar bar-header bar-positive" align-title="center"><!--头部-->
+        <ion-nav-buttons side="left"><!--左边的按钮-->
+            <button class="button button-icon button-clear ion-chevron-left" ng-click="backToHome()">
+            </button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <button class="button button-icon button-clear ion-plus-circled" ng-click="openAddItemDlg()">
+            </button>
+            <button class="button button-icon button-clear ion-plus-round" ng-click="addIndex()">
+            </button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="stable-bg has-header">
+        <ion-refresher on-refresh="doRefresh()"
+                       pulling-text="下拉刷新..."
+                       refreshing-text="正在刷新!"
+                       spinner="android">
+        </ion-refresher>
+        <div class="button-clear item-input-inset search-bar-in" >
+            <label class="item-input-wrapper input-wrapper-bg-1">
+                <i class="icon ion-search placeholder-i-1"></i>
+                <input class="input input-w95" type="text" ng-model="search.title" placeholder="input title to search ..." />
+            </label>
+            <button class="button button-clear" ng-click="findItem()">查  询</button>
+        </div>
+        <ion-list>
+            <ion-item class="item-stable item-thumbnail-left" ng-repeat="item in imgItems">
+                <img ng-src="img/{{item.img}}"/><div><b>{{item.title}}</b></div><div>{{item.content}}</div>
+                <ion-option-button class="button-info" ng-click="deleteItem(item)">
+                    <i class="icon ion-close-round assertive">&nbsp;&nbsp;&nbsp;删除</i>
+                </ion-option-button>
+                <ion-option-button class="button-info" ng-click="editItem(item)">
+                    <i class="icon ion-close-round assertive">&nbsp;&nbsp;&nbsp;编辑</i>
+                </ion-option-button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+
+</ion-view>

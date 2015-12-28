@@ -52,6 +52,11 @@ $stateProvider
             }
         }
     })
+    .state('localdata',{
+        url:'/local/data',
+        templateUrl:'templates/localdata/items.html',
+        controller:'itemDataCtrl'
+    })
     .state('imgpicker',{
         url:'/img/picker',
         templateUrl:'templates/img/picker.html',

@@ -166,8 +166,10 @@
         var Fac={
             initWebSqlDb:initWebSqlDbFun,
             putFdData:putFdDataFun,
+            postOrUpdate:postOrUpdateFun,
             findFdData:findFdDataFun,
             getAllFdData:getAllFdDataFun,
+            rmFdData:removeFdDataFun,
             getAllDocs:getAllDocsFun,
             getDb:getDbFun
         };
@@ -184,23 +186,53 @@
         }
 
         /**
-         * 保存待办数据
+         * 保存数据，_id指定
          * @param data 数据对象
-         * @param callBack 成功时的回调函数,可为空
+         * @returns {*}
          */
-        function putFdDataFun(data,callBack){
-            data._id=_fdId+data.title;
-            _db.put(data).then(function (result) {
+        function putFdDataFun(data){
+           data._id=_fdId+data.title;//指定id
+           return _db.put(data).then(function (result) {
                 tipMsg.showMsg('保存成功。');
-                if(typeof(callBack)==='function'){
-                    callBack(result);
-                }
+                return result;
             }).catch(function (err) {
                 tipMsg.showMsg('保存失败。');
                 console.log(err);
             });
         }
 
+        /**
+         * 保存一条数据，有_id则进行更新操作，否则新增
+         * @param data
+         * @returns {*}
+         */
+        function postOrUpdateFun(data){
+            if(data._id) {
+                return _db.get(data._id).then(function (doc) {
+                    doc.title = data.title;
+                    doc.content = data.content;
+                    return _db.put(doc).then(function (result) {
+                        tipMsg.showMsg('修改成功。');
+                        return result;
+                    }).catch(function (err) {
+                        tipMsg.showMsg('修改失败。');
+                    });
+                });
+            }else{
+                return _db.post(data).then(function (result) {
+                    tipMsg.showMsg('保存成功。');
+                    return result;
+                }).catch(function (err) {
+                    tipMsg.showMsg('保存失败。');
+                });
+            }
+        }
+
+        /**
+         * 根据title查找doc
+         * @param title
+         * @returns {*}
+         */
         function findFdDataFun(title){
             return _db.find({
                 selector: {title:{$eq:title}},
@@ -218,10 +250,18 @@
             });
         }
 
+        /**
+         * 获取所有doc数据
+         * @returns {*}
+         */
         function getAllDocsFun(){
             return _db.allDocs({include_docs: true});
         }
 
+        /**
+         * 获取所有含有title的doc
+         * @returns {*}
+         */
         function getAllFdDataFun(){
             var data=[];
             return _db.allDocs({include_docs: true}).then(function (result) {
@@ -234,6 +274,14 @@
                 }
                 return data;
             });
+        }
+
+        /**
+         * 删除指定的doc
+         * @param item
+         */
+        function removeFdDataFun(item){
+           return _db.remove(item);
         }
 
         /**

@@ -27,9 +27,12 @@
         </ion-refresher>
     <ion-list>
         <ion-item class="item-stable item-thumbnail-left" ng-repeat="item in imgItems">
-            <img ng-src="img/{{item.img}}"/><div>{{item.title}}</div>
+            <img ng-src="img/{{item.img}}"/><div><b>{{item.title}}</b></div><div>{{item.content}}</div>
             <ion-option-button class="button-info" ng-click="deleteItem(item)">
-                <i class="icon ion-close-round assertive"></i>
+                <i class="icon ion-close-round assertive">&nbsp;&nbsp;&nbsp;删除</i>
+            </ion-option-button>
+            <ion-option-button class="button-info" ng-click="editItem(item)">
+                <i class="icon ion-close-round assertive">&nbsp;&nbsp;&nbsp;编辑</i>
             </ion-option-button>
         </ion-item>
     </ion-list>

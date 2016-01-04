@@ -1,4 +1,4 @@
-<ion-view view-title="本地存储"><!--导航栏标题 view-title="条目列表"-->
+<ion-view view-title="本地存储" enable-menu-with-back-views="true"><!--导航栏标题 view-title="条目列表"-->
     <ion-nav-bar class="bar bar-header bar-positive" align-title="center"><!--头部-->
         <ion-nav-buttons side="left"><!--左边的按钮-->
             <button class="button button-icon button-clear ion-chevron-left" ng-click="backToHome()">
@@ -17,13 +17,7 @@
                        refreshing-text="正在刷新!"
                        spinner="android">
         </ion-refresher>
-        <div class="button-clear item-input-inset search-bar-in" >
-            <label class="item-input-wrapper input-wrapper-bg-1">
-                <i class="icon ion-search placeholder-i-1"></i>
-                <input class="input input-w95" type="text" ng-model="search.title" placeholder="input title to search ..." />
-            </label>
-            <button class="button button-clear" ng-click="findItem()">查  询</button>
-        </div>
+        <search-input ng-model="search.title" placeholder="input title to search ..." del-show="search.title" del-click="search.title=''" btn-click="findItem()"></search-input>
         <ion-list>
             <ion-item class="item-stable item-thumbnail-left" ng-repeat="item in imgItems">
                 <img ng-src="img/{{item.img}}"/><div><b>{{item.title}}</b></div><div>{{item.content}}</div>

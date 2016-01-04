@@ -1,18 +1,15 @@
 /* Empty. Add your own CSS if you like */
 @charset "UTF-8";
+
+body{
+
+}
 .input-w95{
     width: 95%;
 }
 
-.placeholder-i-1 {
-    color: #387EF5;
-    font-size: 20px;
-}
-
-.input-wrapper-bg-1{
-    background: #FFFFFF;
-}
 
 .search-bar-in{
-    padding: 25px 10px;
+    padding: 10px 10px;
+    min-height: 50px;
 }

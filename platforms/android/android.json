@@ -51,6 +51,10 @@
                         {
                             "xml": "<feature name=\"ImagePicker\"><param name=\"android-package\" value=\"com.synconset.ImagePicker\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"ActionSheet\"><param name=\"android-package\" value=\"nl.xservices.plugins.actionsheet.ActionSheet\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -72,7 +76,7 @@
                     "/*": [
                         {
                             "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-                            "count": 2
+                            "count": 1
                         }
                     ]
                 }
@@ -124,6 +128,9 @@
             "PACKAGE_NAME": "com.ionicframework.demoapp362099"
         },
         "com.synconset.imagepicker": {
+            "PACKAGE_NAME": "com.ionicframework.demoapp362099"
+        },
+        "cordova-plugin-actionsheet": {
             "PACKAGE_NAME": "com.ionicframework.demoapp362099"
         }
     },
@@ -387,6 +394,14 @@
             "clobbers": [
                 "plugins.imagePicker"
             ]
+        },
+        {
+            "file": "plugins/cordova-plugin-actionsheet/www/ActionSheet.js",
+            "id": "cordova-plugin-actionsheet.ActionSheet",
+            "pluginId": "cordova-plugin-actionsheet",
+            "clobbers": [
+                "window.plugins.actionsheet"
+            ]
         }
     ],
     "plugin_metadata": {
@@ -401,6 +416,7 @@
         "cordova-plugin-x-toast": "2.3.1",
         "io.litehelpers.cordova.sqliteStorage": "0.7.5",
         "ionic-plugin-keyboard": "1.0.8",
-        "com.synconset.imagepicker": "1.0.7"
+        "com.synconset.imagepicker": "1.0.7",
+        "cordova-plugin-actionsheet": "2.2.0"
     }
 }

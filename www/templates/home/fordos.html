@@ -8,11 +8,16 @@
     </ion-nav-bar>
     <ion-content class="stable-bg has-header">
        <div class="row ">
-           <div class="col item-stable item-thumbnail-left">
-               <img src="img/1.gif"/>
+           <div class="col" ng-click="toLocalData()">
+               <div class="item item-stable item-thumbnail-left">
+               <img src="img/1.gif"/><div>本地存储</div>
+               </div>
            </div>
-           <div class="col">test</div>
-           <div class="col">test</div>
+           <div class="col" ng-click="toTakePhoto()">
+               <div class="item item-stable item-thumbnail-left">
+                   <img src="img/2.jpg"/><div>照相</div>
+               </div>
+           </div>
        </div>
        <div class="row "></div>
        <div class="row "></div>

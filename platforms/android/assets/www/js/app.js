@@ -15,6 +15,11 @@ appModule.run(function($ionicPlatform,$location,$rootScope,$ionicHistory,tipMsg,
         if(window.StatusBar) {
           StatusBar.styleDefault();
         }
+
+        document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
+            console.log(navigator.camera);
+        }
 //        $cordovaPlugin.someFunction().then(function(){
 //            //安装了插件
 //

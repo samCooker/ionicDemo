@@ -5,6 +5,7 @@
 (function() {
     appModule
         .controller('picCtrl',PicCtrlFun)
+        .controller('takePhotoCtrl',TakePhotoCtrlFun)
     ;
 
     /**
@@ -31,6 +32,24 @@
                     // error getting photos
                 });
 
+        }
+    }
+
+
+    function TakePhotoCtrlFun($scope){
+        $scope.imgs=[];
+        $scope.takePhoto=function(){
+            navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+                destinationType: Camera.DestinationType.FILE_URI });
+
+            function onSuccess(imageURI) {
+                var img = {src:imageURI};
+                $scope.imgs.push(img);
+            }
+
+            function onFail(message) {
+                alert('Failed because: ' + message);
+            }
         }
     }
 })();

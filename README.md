@@ -10,17 +10,17 @@ demo可查看首页的注册对话框
 ***************end***************************
 
 
-****************1.时间插件***********************
+1.时间插件***********************
 cordova CLI: cordova plugin add cordova-plugin-datepicker
 详情可查看https://www.npmjs.com/package/cordova-plugin-datepicker
 *******************end************************
 
-****************2.Toast插件***********************
+2.Toast插件***********************
 cordova plugin add cordova-plugin-x-toast
 详情查看：https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin
 *******************end**************************
 
-*****************3.PouchDB 本地存储插件****************
+3.PouchDB 本地存储插件****************
 PouchDB是操作SQLite数据库的javascript库（跟mongoose操作mongodb一样）
 
 SQLite是一种轻量级的嵌入式数据库（数据库不需要你安装的，手机系统自带，你需要安装的就是SQLite插件）
@@ -36,12 +36,17 @@ PouchDB查询插件:
 https://github.com/nolanlawson/pouchdb-find
 *********************end***********************
 
-********************图片浏览**********************
+4.图片浏览**********************
 cordova CLI: cordova plugin add https://github.com/wymsee/cordova-imagePicker.git
 
 **********************end************************
 
-*****************文件上传下载插件****************
+5.文件上传下载插件****************
 cordova CLI: cordova plugin add cordova-plugin-file-transfer
 
 **********************end**********************
+
+6.拍照*************************
+cordova CLI: cordova plugin add cordova-plugin-camera
+Link  https://github.com/apache/cordova-plugin-camera
+****************end************

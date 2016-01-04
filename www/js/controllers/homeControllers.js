@@ -13,7 +13,6 @@
     function HomeCtrlFun($scope,$ionicModal,$state){
         $scope.logout=logoutFun;
         $scope.fordoNum=80;
-        $scope.toLocalData=toLocalDataFun;
 
         // 创建一个弹出窗模板
         $ionicModal.fromTemplateUrl('templates/models/login.html', {
@@ -25,10 +24,6 @@
 
         function logoutFun(){
             $state.go("login");
-        }
-
-        function toLocalDataFun(){
-            $state.go('localdata');
         }
 
     }
@@ -114,8 +109,17 @@
      * @param tipMsg
      * @constructor
      */
-    function FordosCtrlFun($scope,$ionicModal,dbTool,tipMsg){
+    function FordosCtrlFun($scope,$state,dbTool,tipMsg){
+        $scope.toLocalData=toLocalDataFun;
+        $scope.toTakePhoto=toTakePhotoFun;
 
+        function toLocalDataFun(){
+            $state.go('localdata');
+        }
+
+        function toTakePhotoFun(){
+            $state.go('takephoto');
+        }
 
     }
 
@@ -133,6 +137,14 @@
     function OtherCtrlFun($scope,$ionicActionSheet,tipMsg,$ionicPopup,$filter,tools,$state){
         $scope.share=shareFun;// 显示操作表
         $scope.inputMsg=inputMsgFun;// 显示可输入信息的弹出框
+        $scope.sheetTest=testShareSheet;
+        $scope.sheetTest1=testShareSheet1;
+        $scope.sheetTest2=testShareSheet2;
+        $scope.sheetTest3=testShareSheet3;
+        $scope.sheetTest4=testShareSheet4;
+        $scope.sheetTest=testShareSheet;
+        $scope.deleteTest=testDeleteSheet;
+        $scope.logOutTest=testLogoutSheet;
         $scope.pickDate1=pickDateFun1;//日期选择
         $scope.pickDate2=pickDateFun2;//日期选择
         $scope.pickDate3=pickDateFun3;//日期选择
@@ -140,6 +152,111 @@
         $scope.pickDate5=pickDateFun5;//日期选择
 
         $scope.data={checkData:'A'};//默认选项
+
+        var callback = function(buttonIndex) {
+            setTimeout(function() {
+                // like other Cordova plugins (prompt, confirm) the buttonIndex is 1-based (first button is index 1)
+                alert('button index clicked: ' + buttonIndex);
+            });
+        };
+
+        /**
+         * actionSheet 插件
+         */
+        function testShareSheet() {
+            var options = {
+                'androidTheme': window.plugins.actionsheet.ANDROID_THEMES.THEME_TRADITIONAL, // default is THEME_TRADITIONAL
+                'title': 'What do you want with this image?',
+                'buttonLabels': ['Share via Facebook', 'Share via Twitter'],
+                'androidEnableCancelButton' : true, // default false
+                'winphoneEnableCancelButton' : true, // default false
+                'addCancelButtonWithLabel': 'Cancel',
+                'addDestructiveButtonWithLabel' : 'Delete it',
+                'position': [20, 40] // for iPad pass in the [x, y] position of the popover
+            };
+            // Depending on the buttonIndex, you can now call shareViaFacebook or shareViaTwitter
+            // of the SocialSharing plugin (https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin)
+            window.plugins.actionsheet.show(options, callback);
+        }
+        function testShareSheet1() {
+            var options = {
+                'androidTheme': window.plugins.actionsheet.ANDROID_THEMES.THEME_HOLO_DARK, // default is THEME_TRADITIONAL
+                'title': 'What do you want with this image?',
+                'buttonLabels': ['Share via Facebook', 'Share via Twitter'],
+                'androidEnableCancelButton' : true, // default false
+                'winphoneEnableCancelButton' : true, // default false
+                'addCancelButtonWithLabel': 'Cancel',
+                'addDestructiveButtonWithLabel' : 'Delete it',
+                'position': [20, 40] // for iPad pass in the [x, y] position of the popover
+            };
+            // Depending on the buttonIndex, you can now call shareViaFacebook or shareViaTwitter
+            // of the SocialSharing plugin (https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin)
+            window.plugins.actionsheet.show(options, callback);
+        }
+        function testShareSheet2() {
+            var options = {
+                'androidTheme': window.plugins.actionsheet.ANDROID_THEMES.THEME_HOLO_LIGHT, // default is THEME_TRADITIONAL
+                'title': 'What do you want with this image?',
+                'buttonLabels': ['Share via Facebook', 'Share via Twitter'],
+                'androidEnableCancelButton' : true, // default false
+                'winphoneEnableCancelButton' : true, // default false
+                'addCancelButtonWithLabel': 'Cancel',
+                'addDestructiveButtonWithLabel' : 'Delete it',
+                'position': [20, 40] // for iPad pass in the [x, y] position of the popover
+            };
+            // Depending on the buttonIndex, you can now call shareViaFacebook or shareViaTwitter
+            // of the SocialSharing plugin (https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin)
+            window.plugins.actionsheet.show(options, callback);
+        }
+        function testShareSheet3() {
+            var options = {
+                'androidTheme': window.plugins.actionsheet.ANDROID_THEMES.THEME_DEVICE_DEFAULT_DARK, // default is THEME_TRADITIONAL
+                'title': 'What do you want with this image?',
+                'buttonLabels': ['Share via Facebook', 'Share via Twitter'],
+                'androidEnableCancelButton' : true, // default false
+                'winphoneEnableCancelButton' : true, // default false
+                'addCancelButtonWithLabel': 'Cancel',
+                'addDestructiveButtonWithLabel' : 'Delete it',
+                'position': [20, 40] // for iPad pass in the [x, y] position of the popover
+            };
+            // Depending on the buttonIndex, you can now call shareViaFacebook or shareViaTwitter
+            // of the SocialSharing plugin (https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin)
+            window.plugins.actionsheet.show(options, callback);
+        }
+        function testShareSheet4() {
+            var options = {
+                'androidTheme': window.plugins.actionsheet.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT, // default is THEME_TRADITIONAL
+                'title': 'What do you want with this image?',
+                'buttonLabels': ['Share via Facebook', 'Share via Twitter'],
+                'androidEnableCancelButton' : true, // default false
+                'winphoneEnableCancelButton' : true, // default false
+                'addCancelButtonWithLabel': 'Cancel',
+                'addDestructiveButtonWithLabel' : 'Delete it',
+                'position': [20, 40] // for iPad pass in the [x, y] position of the popover
+            };
+            // Depending on the buttonIndex, you can now call shareViaFacebook or shareViaTwitter
+            // of the SocialSharing plugin (https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin)
+            window.plugins.actionsheet.show(options, callback);
+        }
+
+
+        function testDeleteSheet() {
+            var options = {
+                'addCancelButtonWithLabel': 'Cancel',
+                'addDestructiveButtonWithLabel' : 'Delete note'
+            };
+            window.plugins.actionsheet.show(options, callback);
+        };
+
+        function testLogoutSheet() {
+            var options = {
+                'buttonLabels': ['Log out'],
+                'androidEnableCancelButton' : true, // default false
+                'winphoneEnableCancelButton' : true, // default false
+                'addCancelButtonWithLabel': 'Cancel'
+            };
+            window.plugins.actionsheet.show(options, callback);
+        };
 
         // 显示操作表
         function shareFun(){

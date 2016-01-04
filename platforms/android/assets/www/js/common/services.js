@@ -236,7 +236,7 @@
         function findFdDataFun(title){
             return _db.find({
                 selector: {title:{$eq:title}},
-                fields: ['_id','title','content']
+                fields: ['_id','title','content','img']
             }).then(function(data){
                 var itemList=[];
                 if(data.docs&&data.docs.length>0){

@@ -6,7 +6,62 @@
         .directive('ionRadioSty', IonRadioStyDir) //扩展自ion-radio的指令，修改了其模版
         .directive('ionCheckSty',IonCheckStyDir) //扩展自ion-check的指令，修改了其模版
         .directive('sdDatePicker',DatePickerInputDir)//自定义的日期选择指令
+        .directive('searchInput',SearchInputDir)//带有删除键的查询工具条
         ;
+
+    /**
+     * 带有删除键的查询工具条
+     * @returns {*}
+     * @constructor
+     */
+    function SearchInputDir(){
+        return {
+            restrict:'E',
+            replace:true,
+            require:'?ngModel',
+            transclude: true,
+            template:'<div class="button-clear item-input-inset search-bar-in" >'+
+                        '<div class="item-input-wrapper input-wrapper-bg-1">'+
+                            '<i class="icon ion-search placeholder-i-1"></i>'+
+                            '<input class="input" type="text"/>'+
+                        '</div>'+
+                        '<div class="width-5">'+
+                            '<span class="icon ion-close placeholder-i-1 input-del-i"></span>'+
+                            '<label class="input-q-btn">查  询</label>'+
+                        '</div>'+
+                      '</div>',
+            compile:function(element,attr){
+                var label = element.find('label');
+                var span= element.find('span');
+                var input = element.find('input');
+
+                //label
+                if(angular.isDefined(attr.btnClick)){
+                    label.attr('ng-click',attr.btnClick);
+                }
+                //i
+                if(angular.isDefined(attr.delClick)){
+                    span.attr('ng-click',attr.delClick);
+                }
+                if(angular.isDefined(attr.delShow)){
+                    span.attr('ng-show',attr.delShow);
+                }
+                //input
+                angular.forEach({
+                    'disabled': attr.disabled,
+                    'ng-model': attr.ngModel,
+                    'ng-disabled': attr.ngDisabled,
+                    'placeholder':attr.placeholder
+                }, function(value, name) {
+                    if (angular.isDefined(value)) {
+                        input.attr(name, value);
+                    }
+                });
+
+            }
+        }
+
+    }
 
     //自定义的日期选择指令
     function DatePickerInputDir(){

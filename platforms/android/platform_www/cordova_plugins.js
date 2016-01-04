@@ -258,6 +258,14 @@ module.exports = [
         "clobbers": [
             "plugins.imagePicker"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-actionsheet/www/ActionSheet.js",
+        "id": "cordova-plugin-actionsheet.ActionSheet",
+        "pluginId": "cordova-plugin-actionsheet",
+        "clobbers": [
+            "window.plugins.actionsheet"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -274,7 +282,8 @@ module.exports.metadata =
     "cordova-plugin-x-toast": "2.3.1",
     "io.litehelpers.cordova.sqliteStorage": "0.7.5",
     "ionic-plugin-keyboard": "1.0.8",
-    "com.synconset.imagepicker": "1.0.7"
+    "com.synconset.imagepicker": "1.0.7",
+    "cordova-plugin-actionsheet": "2.2.0"
 }
 // BOTTOM OF METADATA
 });

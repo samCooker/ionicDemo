@@ -21,7 +21,7 @@
         $scope.backToHome=backToHomeFun;
 
         function backToHomeFun(){
-            $state.go('app.newfordos');
+            $state.go('app.fordos');
         }
 
         //添加索引
@@ -88,6 +88,9 @@
         $scope.imgItems=[];
         $scope.itemData={};
         $scope.search={};
+        $scope.clearSearchTitle= function () {
+            $scope.search.title='';
+        };
 
         var imgSrc={1:'1.gif',2:'2.jpg',3:'3.jpg',4:'4.jpg',5:'5.png',6:'6.jpg'};
 

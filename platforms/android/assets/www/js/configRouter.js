@@ -52,10 +52,20 @@ $stateProvider
             }
         }
     })
+    .state('localdata',{
+        url:'/local/data',
+        templateUrl:'templates/localdata/items.html',
+        controller:'itemDataCtrl'
+    })
     .state('imgpicker',{
         url:'/img/picker',
         templateUrl:'templates/img/picker.html',
         controller:'picCtrl'
+    })
+    .state('takephoto',{
+        url:'/plugins/takephoto',
+        templateUrl:'templates/plugins/take-photo.html',
+        controller:'takePhotoCtrl'
     })
     ;
     $urlRouterProvider.otherwise('/login');//找不到对应url的默认设置

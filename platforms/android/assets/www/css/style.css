@@ -1,1 +1,15 @@
 /* Empty. Add your own CSS if you like */
+@charset "UTF-8";
+
+body{
+
+}
+.input-w95{
+    width: 95%;
+}
+
+
+.search-bar-in{
+    padding: 10px 10px;
+    min-height: 50px;
+}

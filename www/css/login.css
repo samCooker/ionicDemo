@@ -22,15 +22,3 @@
     color: #11A8DE;
 }
 
-/*日期选择按钮样式*/
-.ss-date-pick{
-    background: #83F4F9;
-    width: 300px;
-}
-.ss-date-pick input {
-    width:90%;
-}
-.ss-date-pick i {
-    font-size: 30px;
-    color: #FFFFFF;
-}

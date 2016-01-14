@@ -1,21 +1,21 @@
-<ion-view ><!--enable-menu-with-back-views="false" 是否允许物理返回键返回 view-title="fordos"-->
+<ion-view view-title="Items list"><!--enable-menu-with-back-views="false" 是否允许物理返回键返回 view-title="fordos"-->
     <ion-nav-bar class="bar bar-header bar-positive" align-title="center"><!--头部-->
         <ion-nav-buttons side="left"><!--左边的按钮-->
             <!--打开左侧边栏-->
             <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
             </button>
         </ion-nav-buttons>
-        <ion-nav-buttons side="right">
-            <div class="bar bar-header bar-positive button-clear item-input-inset">
-                <label class="item-input-wrapper">
-                    <i class="icon ion-search placeholder-icon"></i>
-                    <input class="input" type="text" ng-model="searchTitle" placeholder="input title to search ..." />
-                </label>
-                <div class="button button-clear">
-                    <button class="button button-icon button-clear ion-search" ng-click="search()"></button>
-                </div>
-            </div>
-        </ion-nav-buttons>
+        <!--<ion-nav-buttons side="right">-->
+            <!--<div class="bar bar-header bar-positive button-clear item-input-inset">-->
+                <!--<label class="item-input-wrapper">-->
+                    <!--<i class="icon ion-search placeholder-icon"></i>-->
+                    <!--<input class="input" type="text" ng-model="searchTitle" placeholder="input title to search ..." />-->
+                <!--</label>-->
+                <!--<div class="button button-clear">-->
+                    <!--<button class="button button-icon button-clear ion-search" ng-click="search()"></button>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</ion-nav-buttons>-->
     </ion-nav-bar>
     <ion-content on-scroll-complete="scrollComplete()"  delegate-handle="fordoScroll" class="stable-bg has-header">
         <ion-refresher on-refresh="doRefresh()"
@@ -23,8 +23,9 @@
                        refreshing-text="正在刷新!"
                        spinner="android">
         </ion-refresher>
+        <search-input ng-model="searchTitle" placeholder="input title to search ..." del-show="searchTitle" del-click="searchTitle=''" btn-click="search()"></search-input>
         <ion-list>
-            <ion-item ng-repeat="item in itemList" >
+            <ion-item ng-repeat="item in itemList">
                 {{item.title}}
                 <!--列表按钮-->
                 <ion-option-button class="button-info" ng-click="finishItem(item)">

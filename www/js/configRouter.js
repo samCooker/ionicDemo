@@ -52,6 +52,7 @@ $stateProvider
             }
         }
     })
+    //*****各插件路径****
     .state('localdata',{
         url:'/local/data',
         templateUrl:'templates/localdata/items.html',
@@ -66,6 +67,16 @@ $stateProvider
         url:'/plugins/takephoto',
         templateUrl:'templates/plugins/take-photo.html',
         controller:'takePhotoCtrl'
+    })
+    .state('admobpro',{
+        url:'/plugins/admobpro',
+        templateUrl:'templates/plugins/admob-pro.html',
+        controller:'adMobProCtrl'
+    })
+    .state('pickdate',{
+        url:'/plugins/pickdate',
+        templateUrl:'templates/plugins/pick-date.html',
+        controller:'pickDateCtrl'
     })
     ;
     $urlRouterProvider.otherwise('/login');//找不到对应url的默认设置

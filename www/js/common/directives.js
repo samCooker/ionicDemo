@@ -3,10 +3,12 @@
  */
 (function(){
     appModule
-        .directive('ionRadioSty', IonRadioStyDir) //扩展自ion-radio的指令，修改了其模版
-        .directive('ionCheckSty',IonCheckStyDir) //扩展自ion-check的指令，修改了其模版
-        .directive('sdDatePicker',DatePickerInputDir)//自定义的日期选择指令
-        .directive('searchInput',SearchInputDir)//带有删除键的查询工具条
+        .directive('csIonRadio', CsIonRadioDir) //扩展自ion-radio的指令，修改了其模版
+        .directive('csIonCheck',CsIonCheckDir) //扩展自ion-check的指令，修改了其模版
+        .directive('csDatePicker',CsDatePickerDir)//自定义的日期选择指令
+        .directive('csTimePicker',CsTimePickerDir)//自定义的时间选择指令
+        .directive('csSearchInput',CsSearchInputDir)//带有删除键的查询工具条
+        .directive('csBackTo',CsbackToDir)//顶部栏左侧返回按钮
         ;
 
     /**
@@ -14,7 +16,7 @@
      * @returns {*}
      * @constructor
      */
-    function SearchInputDir(){
+    function CsSearchInputDir(){
         return {
             restrict:'E',
             replace:true,
@@ -63,15 +65,19 @@
 
     }
 
-    //自定义的日期选择指令
-    function DatePickerInputDir(){
+    /**
+     * 自定义的日期选择指令
+     * @returns {*}
+     * @constructor
+     */
+    function CsDatePickerDir(){
         return {
             restrict:'E',
             replace:true,
             require:'?ngModel',
             transclude: true,
             template:
-                '<label class="item-input-wrapper">'+
+                '<label class="item-input-wrapper ss-date-pick">'+
                 '<input class="input" type="text" readonly/>'+
                 '<i class="icon ion-calendar placeholder-icon"></i>'+
                 '</label>',
@@ -117,8 +123,65 @@
         }
     }
 
-    //扩展自ion-radio的指令，修改了其模版
-    function IonRadioStyDir(){
+    function CsTimePickerDir(){
+        return {
+            restrict:'E',
+            replace:true,
+            require:'?ngModel',
+            transclude: true,
+            template:
+                '<label class="item-input-wrapper ss-time-pick">'+
+                '<input class="input" type="text" readonly/>'+
+                '<i class="icon ion-clock placeholder-icon"></i>'+
+                '</label>',
+            compile:function(element,attr){
+                //自定义日期图标
+                if(attr.icon){
+                    var iconElm = element.find('i');
+                    iconElm.removeClass('ion-calendar').addClass(attr.icon);
+                }
+
+                var label = element.find('label');
+                if(angular.isDefined(attr.ngClick)){
+                    label.attr('ng-click',attr.ngClick);
+                }
+                if(attr.class){
+                    label.addClass(attr.class);
+                }
+
+                var input = element.find('input');
+                angular.forEach({
+                    'name': attr.name,
+                    'value': attr.value,
+                    'disabled': attr.disabled,
+                    'ng-value': attr.ngValue,
+                    'ng-model': attr.ngModel,
+                    'ng-disabled': attr.ngDisabled,
+                    'ng-change': attr.ngChange,
+                    'ng-required': attr.ngRequired,
+                    'required': attr.required,
+                    'placeholder':attr.placeholder
+                }, function(value, name) {
+                    if (angular.isDefined(value)) {
+                        input.attr(name, value);
+                    }
+                });
+
+                return function(scope, element, attr) {
+                    scope.getValue = function() {
+                        return scope.ngValue || attr.value;
+                    };
+                };
+            }
+        }
+    }
+
+    /**
+     * 扩展自ion-radio的指令，修改了其模版
+     * @returns {*}
+     * @constructor
+     */
+    function CsIonRadioDir(){
         return {
             restrict: 'E',
             replace: true,
@@ -165,8 +228,12 @@
         };
     }
 
-    //扩展自ion-check的指令，修改了其模版
-    function IonCheckStyDir(){
+    /**
+     * 扩展自ion-check的指令，修改了其模版
+     * @returns {*}
+     * @constructor
+     */
+    function CsIonCheckDir(){
         return {
             restrict: 'E',
             replace: true,
@@ -200,6 +267,29 @@
                 });
             }
         };
+    }
+
+
+    /**
+     * 返回指定状态的页面，默认返回首页app.fordos
+     * @returns {*}
+     */
+    function CsbackToDir(){
+        return {
+            restrict:'E',
+            transclude: true,
+            replace:true,
+            scope:{
+                backToState:'@'//绑定back-to-state属性的字符串
+            },
+            template:'<button class="button button-icon button-clear ion-chevron-left" ng-click="s_backToHome()"></button>',
+            controller:function($scope,$state){
+                var stateName=$scope.backToState||'app.fordos';
+                $scope.s_backToHome=function(){
+                    $state.go(stateName);
+                }
+            }
+        }
     }
 
 })();

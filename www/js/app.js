@@ -4,7 +4,7 @@
 var appModule = angular.module('starter', ['ionic','ngCordova']);
 
 // 设置运行时的参数
-appModule.run(function($ionicPlatform,$location,$rootScope,$ionicHistory,tipMsg,dbTool) {
+appModule.run(function($ionicPlatform,$location,$rootScope,$ionicHistory,$state,tipMsg,dbTool) {
 
     $ionicPlatform.ready(function() {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -15,18 +15,6 @@ appModule.run(function($ionicPlatform,$location,$rootScope,$ionicHistory,tipMsg,
         if(window.StatusBar) {
           StatusBar.styleDefault();
         }
-
-        document.addEventListener("deviceready", onDeviceReady, false);
-        function onDeviceReady() {
-            console.log(navigator.camera);
-        }
-//        $cordovaPlugin.someFunction().then(function(){
-//            //安装了插件
-//
-//        }, function(){
-//            //没有安装插件
-//            tipMsg.showMsg("没有安装插件。");
-//        });
     });
 
     //初始化本地存储数据库

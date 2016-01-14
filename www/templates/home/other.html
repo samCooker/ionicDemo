@@ -19,7 +19,7 @@
             <div class="item item-divider">Check test : 1:{{isChecked1}} 2:{{isChecked2}}</div>
             <ion-checkbox ng-model="isChecked1" ng-value="check" ng-true-value="'check'" ng-false-value="'uncheck'">checkbox</ion-checkbox>
             <!--自定义的checkbox-->
-            <ion-check-sty ng-model="isChecked2" ng-value="check" ng-true-value="'check'" ng-false-value="'uncheck'">checkbox</ion-check-sty>
+            <cs-ion-check ng-model="isChecked2" ng-value="check" ng-true-value="'check'" ng-false-value="'uncheck'">checkbox</cs-ion-check>
 
             <div class="item item-divider" style="background-color: #FFF;"></div>
 
@@ -29,24 +29,8 @@
             <ion-radio ng-model="data.checkData" ng-value="'B'" >Choose B</ion-radio>
             <ion-radio ng-model="data.checkData" ng-value="'C'" >Choose C</ion-radio>
             <!--自定义的radio-->
-            <ion-radio-sty ng-model="data.checkData" ng-value="'D'">Choose D</ion-radio-sty>
+            <cs-ion-radio ng-model="data.checkData" ng-value="'D'">Choose D</cs-ion-radio>
 
-            <div class="item">
-            <!--自定义的日期标签-->
-            <sd-date-picker class="ss-date-pick" ng-click="pickDate1()" ng-model="pickDateVal1" placeholder="click to pick date"></sd-date-picker>
-            </div>
-            <div class="item">
-            <sd-date-picker class="ss-date-pick" ng-click="pickDate2()" ng-model="pickDateVal2" placeholder="click to pick date"></sd-date-picker>
-            </div>
-            <div class="item">
-            <sd-date-picker class="ss-date-pick" ng-click="pickDate3()" ng-model="pickDateVal3" placeholder="click to pick date"></sd-date-picker>
-            </div>
-            <div class="item">
-            <sd-date-picker class="ss-date-pick" ng-click="pickDate4()" ng-model="pickDateVal4" placeholder="click to pick date"></sd-date-picker>
-            </div>
-            <div class="item">
-            <sd-date-picker class="ss-date-pick" ng-click="pickDate5()" ng-model="pickDateVal5" placeholder="click to pick date"></sd-date-picker>
-            </div>
             <div class="item" >
                 <button class="button" ng-click="sheetTest()">share</button>
                 <button class="button" ng-click="sheetTest1()">share1</button>

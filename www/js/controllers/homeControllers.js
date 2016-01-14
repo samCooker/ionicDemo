@@ -109,9 +109,11 @@
      * @param tipMsg
      * @constructor
      */
-    function FordosCtrlFun($scope,$state,dbTool,tipMsg){
+    function FordosCtrlFun($scope,$state){
         $scope.toLocalData=toLocalDataFun;
         $scope.toTakePhoto=toTakePhotoFun;
+        $scope.toAdMobPro=toAdMobProFun;
+        $scope.toPickDate=toPickDateFun;
 
         function toLocalDataFun(){
             $state.go('localdata');
@@ -119,6 +121,14 @@
 
         function toTakePhotoFun(){
             $state.go('takephoto');
+        }
+
+        function toAdMobProFun(){
+            $state.go('admobpro');
+        }
+
+        function toPickDateFun(){
+            $state.go('pickdate');
         }
 
     }
@@ -145,11 +155,6 @@
         $scope.sheetTest=testShareSheet;
         $scope.deleteTest=testDeleteSheet;
         $scope.logOutTest=testLogoutSheet;
-        $scope.pickDate1=pickDateFun1;//日期选择
-        $scope.pickDate2=pickDateFun2;//日期选择
-        $scope.pickDate3=pickDateFun3;//日期选择
-        $scope.pickDate4=pickDateFun4;//日期选择
-        $scope.pickDate5=pickDateFun5;//日期选择
 
         $scope.data={checkData:'A'};//默认选项
 
@@ -246,7 +251,7 @@
                 'addDestructiveButtonWithLabel' : 'Delete note'
             };
             window.plugins.actionsheet.show(options, callback);
-        };
+        }
 
         function testLogoutSheet() {
             var options = {
@@ -256,7 +261,7 @@
                 'addCancelButtonWithLabel': 'Cancel'
             };
             window.plugins.actionsheet.show(options, callback);
-        };
+        }
 
         // 显示操作表
         function shareFun(){
@@ -294,57 +299,6 @@
             });
         }
 
-        //日期选择
-        function pickDateFun1(){
-            tools.dataPicker(function(date){
-                $scope.pickDateVal1=$filter('date')(date,'yyyy-MM-dd');
-                $scope.$broadcast('scroll.refreshComplete');//刷新一下页面，否则页面不显示
-            },{
-                date:$scope.pickDateVal1,
-                androidTheme:1
-            });
-        }
-        //日期选择
-        function pickDateFun2(){
-            tools.dataPicker(function(date){
-                $scope.pickDateVal2=$filter('date')(date,'yyyy-MM-dd HH:mm:ss');
-                $scope.$broadcast('scroll.refreshComplete');//刷新一下页面，否则页面不显示
-            },{
-                date:$scope.pickDateVal2,
-                androidTheme:2
-            });
-        }
-        //日期选择
-        function pickDateFun3(){
-            tools.dataPicker(function(date){
-                $scope.pickDateVal3=$filter('date')(date,'yyyy-MM-dd HH:mm:ss');
-                $scope.$broadcast('scroll.refreshComplete');//刷新一下页面，否则页面不显示
-            },{
-                date:$scope.pickDateVal3,
-                androidTheme:3
-            });
-        }
-        //日期选择
-        function pickDateFun4(){
-            tools.dataPicker(function(date){
-                $scope.pickDateVal4=$filter('date')(date,'yyyy-MM-dd HH:mm:ss');
-                $scope.$broadcast('scroll.refreshComplete');//刷新一下页面，否则页面不显示
-            },{
-                date:$scope.pickDateVal4,
-                androidTheme:4
-            });
-        }
-        //日期选择
-        function pickDateFun5(){
-            tools.dataPicker(function(date){
-                $scope.pickDateVal5=$filter('date')(date,'yyyy-MM-dd HH:mm:ss');
-                $scope.$broadcast('scroll.refreshComplete');//刷新一下页面，否则页面不显示
-            },{
-                date:$scope.pickDateVal5,
-                mode:'time',
-                androidTheme:5
-            });
-        }
     }
 
 })();

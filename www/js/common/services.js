@@ -112,10 +112,10 @@
      * @returns {*}
      * @constructor
      */
-    function ToolsFun(tipMsg){
+    function ToolsFun(tipMsg,$q){
         var Fac={
             dataPicker:dataPickerFun //日期控件
-        }
+        };
 
         /**
          * 日期控件(success:选择成功后的回调函数,[options:选择参数])
@@ -131,26 +131,25 @@
          * //android日期选择主题样式:THEME_TRADITIONAL | THEME_HOLO_DARK | THEME_HOLO_LIGHT | THEME_DEVICE_DEFAULT_DARK | THEME_DEVICE_DEFAULT_LIGHT
          * androidTheme: window.plugins.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
          * */
-        function dataPickerFun(success,options){
+        function dataPickerFun(options){
+            var defer=$q.defer();
             if(window.plugins&&window.plugins.datePicker){
                 var opts=options||{};
                 opts.date = opts.date || new Date();//指定开始选中的时间
                 window.plugins.datePicker.show(
                     opts,
                     function(returnDate){
-                    if(typeof(success)==="function"){
-                        success(returnDate);
-                    }else{
-                        console.log(success+" 不是一个方法。");
-                    }
+                        defer.resolve(returnDate);
                     },
                     function(error) {
                         //取消事件
+                        defer.reject(error);
                     }
                 );
             }else{
                 tipMsg.showMsg("no datePicker.");
             }
+            return defer.promise;
         }
 
         return Fac;

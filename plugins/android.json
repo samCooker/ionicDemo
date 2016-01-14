@@ -7,6 +7,12 @@
         "files": {}
     },
     "installed_plugins": {
+        "com.synconset.imagepicker": {
+            "PACKAGE_NAME": "com.ionicframework.demoapp362099"
+        },
+        "cordova-plugin-actionsheet": {
+            "PACKAGE_NAME": "com.ionicframework.demoapp362099"
+        },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "com.ionicframework.demoapp362099"
         },
@@ -40,12 +46,16 @@
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.ionicframework.demoapp362099"
         },
-        "com.synconset.imagepicker": {
+        "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.ionicframework.demoapp362099"
         },
-        "cordova-plugin-actionsheet": {
+        "cordova-plugin-admobpro": {
             "PACKAGE_NAME": "com.ionicframework.demoapp362099"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-extension": {
+            "PACKAGE_NAME": "com.ionicframework.demoapp362099"
+        }
+    }
 }

@@ -1,0 +1,28 @@
+<ion-view view-title="日期选择">
+    <ion-nav-bar class="bar bar-header bar-positive" align-title="center"><!--头部-->
+        <ion-nav-buttons side="left" ><!--左边的按钮-->
+            <cs-back-to back-to-state=""></cs-back-to>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content>
+        <div class="list">
+            <div class="item">
+                <!--自定义的日期标签-->
+                <cs-date-picker ng-click="pickDate1()" ng-model="pickDateVal1" placeholder="click to pick date"></cs-date-picker>
+            </div>
+            <div class="item">
+                <cs-date-picker ng-click="pickDate2()" ng-model="pickDateVal2" placeholder="click to pick date"></cs-date-picker>
+            </div>
+            <div class="item">
+                <cs-time-picker ng-click="pickDate3()" ng-model="pickDateVal3" placeholder="pick time"></cs-time-picker>
+            </div>
+            <div class="item">
+                <cs-time-picker ng-click="pickDate4()" ng-model="pickDateVal4" placeholder="pick time"></cs-time-picker>
+            </div>
+        </div>
+    </ion-content>
+    <!--底部工具栏-->
+    <!--<ion-footer-bar align-title="center" class="bar-assertive">-->
+    <!--<h1 class="title" ></h1>-->
+    <!--</ion-footer-bar>-->
+</ion-view>

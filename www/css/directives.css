@@ -6,12 +6,29 @@
 /*日期选择按钮样式*/
 .ss-date-pick{
     background: #83F4F9;
-    width: 300px;
+    width: 50%;
+    min-width: 200px;
+    max-width: 300px;
 }
 .ss-date-pick input {
-    width:90%;
+    width:85%;
 }
 .ss-date-pick i {
+    font-size: 30px;
+    color: #FFFFFF;
+}
+
+/*时间选择*/
+.ss-time-pick{
+    background: #83F4F9;
+    width: 40%;
+    min-width: 100px;
+    max-width: 150px;
+}
+.ss-time-pick input {
+    width:80%;
+}
+.ss-time-pick i {
     font-size: 30px;
     color: #FFFFFF;
 }

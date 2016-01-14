@@ -44,9 +44,23 @@ cordova CLI: cordova plugin add https://github.com/wymsee/cordova-imagePicker.gi
 5.文件上传下载插件****************
 cordova CLI: cordova plugin add cordova-plugin-file-transfer
 
+link :https://github.com/apache/cordova-plugin-file-transfer
 **********************end**********************
 
 6.拍照*************************
 cordova CLI: cordova plugin add cordova-plugin-camera
 Link  https://github.com/apache/cordova-plugin-camera
 ****************end************
+
+7. ***************************
+cordova CLI :cordova plugin add cordova-plugin-admobpro
+Link        :https://github.com/floatinghotpot/cordova-admob-pro#quick-demo
+
+***********end***************
+
+8.**********fileOpener for android*********
+
+cordova CLI :cordova plugin add cordova-plugin-fileopener
+Link        :https://github.com/Smile-SA/cordova-plugin-fileopener
+
+*************************

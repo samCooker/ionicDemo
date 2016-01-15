@@ -1,0 +1,81 @@
+{
+  "_args": [
+    [
+      "cordova-plugin-phonecaller",
+      "f:\\download"
+    ]
+  ],
+  "_cnpm_publish_time": 1449846722464,
+  "_from": "cordova-plugin-phonecaller@*",
+  "_id": "cordova-plugin-phonecaller@0.0.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/cordova-plugin-phonecaller",
+  "_nodeVersion": "5.2.0",
+  "_npmUser": {
+    "email": "dmitry.gladkov@gmail.com",
+    "name": "dgl"
+  },
+  "_npmVersion": "3.3.12",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "cordova-plugin-phonecaller",
+    "raw": "cordova-plugin-phonecaller",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "*",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "http://registry.npm.taobao.org/cordova-plugin-phonecaller/download/cordova-plugin-phonecaller-0.0.1.tgz",
+  "_shasum": "3d2f55c989112a470090ae238c827d4114aa49dd",
+  "_shrinkwrap": null,
+  "_spec": "cordova-plugin-phonecaller",
+  "_where": "f:\\download",
+  "author": {
+    "name": "CodeBakery"
+  },
+  "cordova": {
+    "id": "cordova-plugin-phonecaller",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "dependencies": {},
+  "description": "Call phone numbers from your app",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "noattachment": false,
+    "shasum": "3d2f55c989112a470090ae238c827d4114aa49dd",
+    "size": 6279,
+    "tarball": "http://registry.npm.taobao.org/cordova-plugin-phonecaller/download/cordova-plugin-phonecaller-0.0.1.tgz"
+  },
+  "gitHead": "b069d84b342c9bfe7ade96eaf4fac03de0e67261",
+  "issue": "https://github.com/codebakery/cordova-plugin-phonecaller/issues",
+  "keywords": [
+    "call",
+    "cordova",
+    "cordova-android",
+    "cordova-ios",
+    "ecosystem:cordova",
+    "phonecaller"
+  ],
+  "license": "Apache 2.0",
+  "maintainers": [
+    {
+      "name": "dgl",
+      "email": "dmitry.gladkov@gmail.com"
+    }
+  ],
+  "name": "cordova-plugin-phonecaller",
+  "optionalDependencies": {},
+  "publish_time": 1449846722464,
+  "readme": "ERROR: No README data found!",
+  "repo": "https://github.com/codebakery/cordova-plugin-phonecaller.git",
+  "scripts": {},
+  "version": "0.0.1"
+}

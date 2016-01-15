@@ -51,6 +51,9 @@
         },
         "cordova-plugin-admobpro": {
             "PACKAGE_NAME": "com.ionicframework.demoapp362099"
+        },
+        "cordova-plugin-phonecaller":{
+            "PACKAGE_NAME": "com.ionicframework.demoapp362099"
         }
     },
     "dependent_plugins": {

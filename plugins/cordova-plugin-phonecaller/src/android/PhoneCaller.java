@@ -22,7 +22,8 @@ public class PhoneCaller extends CordovaPlugin {
         if ("call".equals(action)) {
             try {
                 Uri phoneNumber = Uri.parse("tel:" + args.getString(0));
-                Intent callIntent = new Intent(Intent.ACTION_CALL, phoneNumber);
+                //Intent callIntent = new Intent(Intent.ACTION_CALL, phoneNumber);
+                Intent callIntent = new Intent(Intent.ACTION_DIAL, phoneNumber);
                 this.cordova.getActivity().startActivity(callIntent);
                 callbackContext.success();
             } catch (Exception e) {

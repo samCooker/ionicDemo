@@ -7,10 +7,16 @@
         "files": {}
     },
     "installed_plugins": {
+        "com.cordova.plugins.sms": {
+            "PACKAGE_NAME": "com.ionicframework.demoapp362099"
+        },
         "com.synconset.imagepicker": {
             "PACKAGE_NAME": "com.ionicframework.demoapp362099"
         },
         "cordova-plugin-actionsheet": {
+            "PACKAGE_NAME": "com.ionicframework.demoapp362099"
+        },
+        "cordova-plugin-admobpro": {
             "PACKAGE_NAME": "com.ionicframework.demoapp362099"
         },
         "cordova-plugin-console": {
@@ -22,10 +28,19 @@
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.ionicframework.demoapp362099"
         },
+        "cordova-plugin-extension": {
+            "PACKAGE_NAME": "com.ionicframework.demoapp362099"
+        },
         "cordova-plugin-file": {
             "PACKAGE_NAME": "com.ionicframework.demoapp362099"
         },
         "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.ionicframework.demoapp362099"
+        },
+        "cordova-plugin-fileopener": {
+            "PACKAGE_NAME": "com.ionicframework.demoapp362099"
+        },
+        "cordova-plugin-phonecaller": {
             "PACKAGE_NAME": "com.ionicframework.demoapp362099"
         },
         "cordova-plugin-splashscreen": {
@@ -45,20 +60,7 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.ionicframework.demoapp362099"
-        },
-        "cordova-plugin-camera": {
-            "PACKAGE_NAME": "com.ionicframework.demoapp362099"
-        },
-        "cordova-plugin-admobpro": {
-            "PACKAGE_NAME": "com.ionicframework.demoapp362099"
-        },
-        "cordova-plugin-phonecaller":{
-            "PACKAGE_NAME": "com.ionicframework.demoapp362099"
         }
     },
-    "dependent_plugins": {
-        "cordova-plugin-extension": {
-            "PACKAGE_NAME": "com.ionicframework.demoapp362099"
-        }
-    }
+    "dependent_plugins": {}
 }

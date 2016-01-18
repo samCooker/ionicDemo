@@ -269,12 +269,13 @@
                 buttons: [
                     { text: '<b>Share</b> This' },
                     {text:'<b>pick</b> pictures'},
-                    { text: '<b>input something</b>' }
+                    {text:'<b>call phone</b>'},
+                    { text: '<b>input something</b>' },
+                    {text:'<b>send message</b>'}
                 ],
                 titleText: 'Modify your album',//列表标题
                 cancelText: 'Cancel',//取消按钮文本
                 buttonClicked: function(i) {
-                    //i 点击的按钮序号，从0开始
                     switch(i){
                         case 0:
                             tipMsg.showMsg("share");
@@ -283,9 +284,31 @@
                             $state.go('imgpicker');
                             return true;
                         case 2:
+                            window.PhoneCaller.call('1278123697', function (data) {
+                                tipMsg.showMsg(data);
+                            },function(data){
+                                tipMsg.showMsg(data);
+                            });
+                            return true;
+                        case 3:
                             inputMsgFun();
                             return true;
+                        case 4:
+                            var options = {
+                                replaceLineBreaks: false, // true to replace \n by a new line, false by default
+                                android: {
+                                    intent: 'INTENT'  // send SMS with the native android SMS messaging
+                                    //intent: '' // send SMS without open any other app
+                                }
+                            };
+                            sms.send('13669662025', 'test', options, function(data){
+                                tipMsg.showMsg(data);
+                            },function(data){
+                                tipMsg.showMsg(data);
+                            });
+                            return true;
                     }
+                    //i 点击的按钮序号，从0开始
                     return false;
                 }
             });

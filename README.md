@@ -59,8 +59,16 @@ Link        :https://github.com/floatinghotpot/cordova-admob-pro#quick-demo
 ***********end***************
 
 8.**********fileOpener for android*********
-
 cordova CLI :cordova plugin add cordova-plugin-fileopener
 Link        :https://github.com/Smile-SA/cordova-plugin-fileopener
-
 *************************
+
+9.*************send message**************
+cordova CLI :cordova plugin add cordova-sms-plugin
+Link        :https://github.com/cordova-sms/cordova-sms-plugin
+*************************************
+
+10.*************phonecaller**************
+cordova CLI :cordova plugin add cordova-plugin-phonecaller
+Link        :
+*************************************

@@ -21,6 +21,9 @@
                 <param name="android-package" value="io.codebakery.phonecaller.PhoneCaller"/>
             </feature>
         </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.CALL_PHONE" />
+        </config-file>
         <source-file src="src/android/PhoneCaller.java" target-dir="src/io/codebakery/phonecaller" />
     </platform>
 

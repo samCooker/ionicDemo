@@ -16,9 +16,6 @@
         "cordova-plugin-actionsheet": {
             "PACKAGE_NAME": "com.ionicframework.demoapp362099"
         },
-        "cordova-plugin-admobpro": {
-            "PACKAGE_NAME": "com.ionicframework.demoapp362099"
-        },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "com.ionicframework.demoapp362099"
         },
@@ -59,6 +56,9 @@
             "PACKAGE_NAME": "com.ionicframework.demoapp362099"
         },
         "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.ionicframework.demoapp362099"
+        },
+        "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.ionicframework.demoapp362099"
         }
     },

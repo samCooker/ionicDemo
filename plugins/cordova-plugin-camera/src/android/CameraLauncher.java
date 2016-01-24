@@ -114,12 +114,6 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
     private Uri scanMe;                     // Uri of image to be added to content store
     private Uri croppedUri;
 
-
-    protected void getReadPermission(int requestCode)
-    {
-        cordova.requestPermission(this, requestCode, Manifest.permission.READ_EXTERNAL_STORAGE);
-    }
-
     /**
      * Executes the request and returns PluginResult.
      *
@@ -178,8 +172,8 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
                     // preserve the original exif data and filename in the modified file that is
                     // created
                     if(this.mediaType == PICTURE && (this.destType == FILE_URI || this.destType == NATIVE_URI)
-                            && fileWillBeModified() && !cordova.hasPermission(permissions[0])) {
-                        getReadPermission(SAVE_TO_ALBUM_SEC);
+                            && fileWillBeModified() && !PermissionHelper.hasPermission(this, permissions[0])) {
+                        PermissionHelper.requestPermission(this, SAVE_TO_ALBUM_SEC, Manifest.permission.READ_EXTERNAL_STORAGE);
                     } else {
                         this.getImage(this.srcType, destType, encodingType);
                     }
@@ -238,10 +232,10 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
      * @param returnType        Set the type of image to return.
      */
     public void callTakePicture(int returnType, int encodingType) {
-        if (cordova.hasPermission(permissions[0])) {
+        if (PermissionHelper.hasPermission(this, permissions[0])) {
             takePicture(returnType, encodingType);
         } else {
-            getReadPermission(TAKE_PIC_SEC);
+            PermissionHelper.requestPermission(this, TAKE_PIC_SEC, Manifest.permission.READ_EXTERNAL_STORAGE);
         }
     }
 
@@ -503,7 +497,7 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
                     } else {
                         writeUncompressedImage(this.imageUri, uri);
                     }
-                    
+
                     this.callbackContext.success(uri.toString());
                 }
             } else {
@@ -1213,5 +1207,59 @@ private String ouputModifiedBitmap(Bitmap bitmap, Uri uri) throws IOException {
     private boolean fileWillBeModified() {
         return (this.targetWidth > 0 && this.targetHeight > 0) ||
                     this.correctOrientation || this.allowEdit;
+    }
+
+    /**
+     * Taking or choosing a picture launches another Activity, so we need to implement the
+     * save/restore APIs to handle the case where the CordovaActivity is killed by the OS
+     * before we get the launched Activity's result.
+     */
+    public Bundle onSaveInstanceState() {
+        Bundle state = new Bundle();
+        state.putInt("destType", this.destType);
+        state.putInt("srcType", this.srcType);
+        state.putInt("mQuality", this.mQuality);
+        state.putInt("targetWidth", this.targetWidth);
+        state.putInt("targetHeight", this.targetHeight);
+        state.putInt("encodingType", this.encodingType);
+        state.putInt("mediaType", this.mediaType);
+        state.putInt("numPics", this.numPics);
+        state.putBoolean("allowEdit", this.allowEdit);
+        state.putBoolean("correctOrientation", this.correctOrientation);
+        state.putBoolean("saveToPhotoAlbum", this.saveToPhotoAlbum);
+
+        if(this.croppedUri != null) {
+            state.putString("croppedUri", this.croppedUri.toString());
+        }
+
+        if(this.imageUri != null) {
+            state.putString("imageUri", this.imageUri.toString());
+        }
+
+        return state;
+    }
+
+    public void onRestoreStateForActivityResult(Bundle state, CallbackContext callbackContext) {
+        this.destType = state.getInt("destType");
+        this.srcType = state.getInt("srcType");
+        this.mQuality = state.getInt("mQuality");
+        this.targetWidth = state.getInt("targetWidth");
+        this.targetHeight = state.getInt("targetHeight");
+        this.encodingType = state.getInt("encodingType");
+        this.mediaType = state.getInt("mediaType");
+        this.numPics = state.getInt("numPics");
+        this.allowEdit = state.getBoolean("allowEdit");
+        this.correctOrientation = state.getBoolean("correctOrientation");
+        this.saveToPhotoAlbum = state.getBoolean("saveToPhotoAlbum");
+
+        if(state.containsKey("croppedUri")) {
+            this.croppedUri = Uri.parse(state.getString("croppedUri"));
+        }
+
+        if(state.containsKey("imageUri")) {
+            this.imageUri = Uri.parse(state.getString("imageUri"));
+        }
+
+        this.callbackContext = callbackContext;
     }
 }

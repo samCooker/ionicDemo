@@ -41,9 +41,10 @@
      * 拍照
      * @param $scope
      * @param $cordovaCamera
+     * @param tipMsg
      * @constructor
      */
-    function TakePhotoCtrlFun($scope,$cordovaCamera){
+    function TakePhotoCtrlFun($scope,$cordovaCamera,tipMsg){
         $scope.imgs=[];
         $scope.takePhoto=function(){
             $cordovaCamera.getPicture({
@@ -52,6 +53,8 @@
             }).then(function(imageURI){
                 var img = {src:imageURI};
                 $scope.imgs.push(img);
+            }).catch(function(error){
+                tipMsg.showMsg(error);
             });
         }
     }
